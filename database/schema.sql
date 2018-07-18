@@ -33,12 +33,16 @@ CREATE TABLE listings (
 
 );
 
+
+
 CREATE TABLE listings_lists (
   listing_id INT NOT NULL, 
   list_id INT NOT NULL,
   FOREIGN KEY (listing_id) REFERENCES listings(id),
   FOREIGN KEY (list_id) REFERENCES lists(id)
 );
+
+
 
 CREATE TABLE listing_photos (
 	id INT NOT NULL AUTO_INCREMENT, 
@@ -47,5 +51,11 @@ CREATE TABLE listing_photos (
 	PRIMARY KEY(id)
 
 );
+
+-- populating the different tables with some sample data 
+INSERT INTO users (user_name, user_membership_date) VALUES ('JP Vertil', '06/25/2017' );
+INSERT INTO users (user_name, user_membership_date) VALUES ('Jean Luc', '03/22/2016' );
+
+
 
 
