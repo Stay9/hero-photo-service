@@ -53,8 +53,8 @@ CREATE TABLE listing_photos (
 );
 
 -- populating the different tables with some sample data 
-INSERT INTO users (user_name, user_membership_date) VALUES ('JP Vertil', '06/25/2017' );
-INSERT INTO users (user_name, user_membership_date) VALUES ('Jean Luc', '03/22/2016' );
+
+
 
 
 
