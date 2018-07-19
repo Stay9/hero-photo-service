@@ -8,9 +8,12 @@ app.use((req, res, next) => {
   next();
 });
 
+// access the static files
+app.use(express.static('../client/dist'));
 
-// spotholder for middleware of static assets
-
+/*app.get('/', (req, res) => {
+  res.send(200);
+});*/
 
 app.listen(3000, () => {
   console.log('Hero Photo server is listening on port 3000');
