@@ -1,14 +1,20 @@
 // model make queries to the hero database
 const connection = require('./index.js');
 
-
-// populating the users table
+// to populate the users table
 const populateUsers = () => {
-  for (let i = 1; i <= 100; i + 1) {
-    const userName = `user ${i}`;
-    const membershipDate = '06/2018';
+  for (let i = 1; i <= 100; i += 1) {
+    const userNames = ['Neon', 'Omega', 'Kookaburra', 'RagingBull', 'Asylum', 'Flurry', 'Ollie', 'Scoobie', 'Brave', 'Guaymas', 'Pinochio', 'Danana', 'Pepita', 'Padila', 'Ninja', 'Bonza'];
+    const years = ['2018', '2017', '2016', '2015', '2014'];
+    const months = ['01', '03', '05', '07', '09'];
+    const days = ['10', '13', '22', '18', '25'];
+    const dateIndex = Math.floor(Math.random() * 5); // up to index 4
+    const date = `${years[dateIndex]}-${months[dateIndex]}-${days[dateIndex]}`;
+    const rand0and15 = Math.floor(Math.random() * 16); // up to index 15
+    const userName = userNames[rand0and15];
+    const userPhotoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/user${rand0and15}.jpg`;
 
-    const theQuery = `INSERT INTO users (user_name, user_membership_date) VALUES ('${userName}', '${membershipDate}')`;
+    const theQuery = `INSERT INTO users (user_name, user_membership_date, user_photo_url) VALUES ('${userName}', '${date}', '${userPhotoUrl}')`;
     connection.query(theQuery, (err, res) => {
       if (err) {
         console.log('Error in populating the users table', err);
@@ -19,11 +25,16 @@ const populateUsers = () => {
   }
 };
 
-// populating the lists table
+
+// to populate the lists table
 const populateLists = () => {
-  for (let i = 1; i <= 100; i + 1) {
-    const listName = `My favorite list ${i}`;
-    const theQuery = `INSERT INTO lists (list_name, list_user_id) VALUES ('${listName}', ${i})`;
+  const listNames = ['My fav list!', 'Practical wuff houses', 'Da bestest', 'Super classy', '100% Chic'];
+  let theQuery = '';
+  for (let i = 1; i <= 100; i += 1) {
+    // some users will have a list by default and others will not
+    const listIndex = Math.floor(Math.random() * 5); // up to index 4
+    const listName = listNames[listIndex];
+    theQuery = `INSERT INTO lists (list_name, list_user_id) VALUES ('${listName}', ${i})`;
     connection.query(theQuery, (err, res) => {
       if (err) {
         console.log('Error in populating the lists table ', err);
@@ -35,44 +46,85 @@ const populateLists = () => {
 };
 
 
-// populating the listings table
-/*const populateListings = () => {
-  const descriptionArray = [
+// to populate the listings table
+const populateListings = () => {
+  const hostName = ['Neon', 'Omega', 'Kookaburra', 'RagingBull', 'Asylum', 'Flurry', 'Ollie', 'Scoobie', 'Brave', 'Guaymas', 'Pinochio', 'Danana', 'Pepita', 'Padila', 'Ninja', 'Bonza'];
 
-    'The house is equipped with a large kitchen and three bathrooms, it also has a comfortable living room, four bedrooms, a cozy dining room and a small basement.',
+  const mockListingData = {
+    adjectives: ['mewtiful', 'spacious', 'gllamarous', 'whale-built', 'open air', 'cozy', 'brand new', 'vibrant'],
+    penType: ['doghouse', 'barn', 'fishbowl', 'lions den', 'nest', 'quiet hermit shell'],
+    preposition: ['in', 'by', 'close to'],
+    locale: ['ruff neighborhood', 'dog park', 'upscale guppie area', 'cowtown'],
+  };
 
-    'The building is rectangular shaped. The house is partially surrounded by a garden path on two sides.The second floor is the same size as the first, but part of it hangs over the edge of the floor below, creating an overhang on one side and a balcony on the other. This floor follows the same style as the floor below.',
-
-    'The roof is high and square shaped and is covered with wood shingles. One small chimney pokes out the center of the roof. There are no windows on the roof.',
-
-    'The house itself is surrounded by a gorgeous garden with many hidden lights that make the garden come to life at night.',
-
-    'From the outside this house looks impressive. It has been built with wood covered in render and has tan brick decorations. Tall, wide windows add to the overall look of the house and have been added to the house in a fairly asymmetrical pattern.',
-
-    'The house is equipped with a modern kitchen and one modern bathroom, it also has a small living room, four bedrooms, a large dining area, a lounge area and a snug storage room.',
-
-    'The building is shaped like a circle. The house is half surrounded by a garden path.',
-
-    'The second floor is smaller than the first, which allowed for several balconies on the sides of the house. This floor has roughly the same style as the floor below.',
-
-    'The roof is low and triangular and is covered with wheat straw. Two large chimneys sit at the side of the house. Several small windows let in just enough light to the rooms below the roof.',
+  const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 
-    'The house itself is surrounded by a well kept garden. Grass, flower patches and trees have been placed in a stylish way.'];
+  const populateListingDescriptionsTable = () => {
+    const adjectiveIndex = getRandomInt(0, mockListingData.adjectives.length - 1);
+    const penTypeIndex = getRandomInt(0, mockListingData.penType.length - 1);
+    const prepositionIndex = getRandomInt(0, mockListingData.preposition.length - 1);
+    const localeIndex = getRandomInt(0, mockListingData.locale.length - 1);
+    const description = `${mockListingData.adjectives[adjectiveIndex]} ${mockListingData.penType[penTypeIndex]} ${mockListingData.preposition[prepositionIndex]} ${mockListingData.locale[localeIndex]}`;
+    return description;
+  };
 
-  const hostName = ['Neon', 'Omega', 'Kookaburra', 'RagingBull', 'Asylum', 'Flurry', 'Ollie', 'Scoobie', 'Brave', 'Guaymas'];
 
-
-  for (let i = 1; i <= 100; i + 1) {
+  for (let i = 1; i <= 100; i += 1) {
     // generate random number between 1 and 5
-    let rand0and9 = Math.floor(Math.random() * 9);
-    let listingAverage = Math.floor(Math.random() * 5) + 1;
-    let listingTotalReviews = Math.floor(Math.random() * 120);
-    let listingPhotoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry${i}.jpeg`;
+    const rand0and15 = Math.floor(Math.random() * 16); // up to index 15
+    const listingAverage = Math.floor(Math.random() * 5) + 1;
+    const listingTotalReviews = Math.floor(Math.random() * 120);
+    const listingDesc = populateListingDescriptionsTable();
+    const listingHostPhotoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/host${rand0and15}.jpg`;
 
-    const theQuery = `INSERT INTO listings (listing_description, listing_review_average, listing_review_total, listing_host_name, list_host_photo_url) VALUE ('${descriptionArray[rand0and9]}', )`
-    }
-};*/
+    const theQuery = `INSERT INTO listings (listing_description, listing_review_average, listing_review_total, listing_host_name, listing_host_photo_url) VALUE ('${listingDesc}', ${listingAverage}, ${listingTotalReviews}, '${hostName[rand0and15]}', '${listingHostPhotoUrl}' )`;
+    connection.query(theQuery, (err, res) => {
+      if (err) {
+        console.log('Error in populating the listings table ', err);
+      } else {
+        console.log('Success in populating the listings table ', res);
+      }
+    });
+  }
+};
 
-//populateUsers();
-//populateLists();
+// to populate the listing_lists table
+const populateListingsLists = () => {
+  for (let i = 1; i <= 100; i += 1) {
+    const theQuery = `INSERT INTO listings_lists (listing_id, list_id) VALUES (${i}, ${i})`;
+    connection.query(theQuery, (err, res) => {
+      if (err) {
+        console.log('Error in populating the listings_list table ', err);
+      } else {
+        console.log('Success in populating the listings_list table ', res);
+      }
+    });
+  }
+};
+
+// to populate the listing_photos table
+const populateListingPhotos = () => {
+  const photoDescriptions = ['comfy bed', 'spacious room', 'where the cool ones stay', 'presidential suite', 'glamorous bed'];
+  for (let i = 1; i <= 100; i += 1) {
+    const index = Math.floor(Math.random() * 5); // up to 4
+    const rand0and15 = Math.floor(Math.random() * 16);
+    const description = photoDescriptions[index];
+    const photoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry${rand0and15}.jpg`;
+
+    const theQuery = `INSERT INTO listing_photos (photo_description, photo_url) VALUES ('${description}', '${photoUrl}')`;
+    connection.query(theQuery, (err, res) => {
+      if (err) {
+        console.log('Error in populating the listings table ', err);
+      } else {
+        console.log('Success in populating the listings table ', res);
+      }
+    });
+  }
+};
+
+populateUsers();
+populateLists();
+populateListings();
+populateListingsLists();
+populateListingPhotos();

@@ -1,19 +1,19 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: '',
-	database: 'hero'
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'hero',
 
 });
 
 connection.connect((err) => {
-	if (err) {
-		console.log('Error connecting to mysql ', err);
-	} else {
-		console.log('Successful connection to mysql');
-	}
+  if (err) {
+    console.log('Error connecting to mysql ', err);
+  } else {
+    console.log('Successful connection to mysql');
+  }
 });
 
 
