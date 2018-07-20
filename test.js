@@ -9,16 +9,16 @@ const height = 720;
 beforeAll(async () => {
   browser = await puppeteer.launch({
     headless: false,
-    slowMo: 80,https://circleci.com/gh/fullstakreaktor
+    slowMo: 80,
     args: [`--window-size=${width},${height}`],
   });
   page = await browser.newPage();
   await page.setViewport({ width, height });
 });
 
-/*afterAll(async () => {
-  await browser.close();
-});*/
+afterAll( () => {
+   browser.close();
+});
 
 describe('Search function', async () => { // must make this an async function so that "await" may work
 
