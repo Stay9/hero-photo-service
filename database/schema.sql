@@ -6,7 +6,8 @@ USE hero;
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT, 
   user_name VARCHAR(30) NOT NULL, 
-  user_membership_date VARCHAR(30) NOT NULL,
+  user_membership_date DATE NOT NULL,
+  user_photo_url VARCHAR(250) NOT NULL, 
   PRIMARY KEY(id)
 );
 
@@ -14,7 +15,7 @@ CREATE TABLE users (
 
 CREATE TABLE lists (
   id INT NOT NULL AUTO_INCREMENT,
-  list_name VARCHAR(50) NOT NULL, 
+  list_name VARCHAR(50) , 
   list_user_id INT NOT NULL,
   PRIMARY KEY(id),
   FOREIGN KEY(list_user_id) REFERENCES users(id)
@@ -24,11 +25,11 @@ CREATE TABLE lists (
 
 CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT, 
-  listing_description VARCHAR(255), 
   listing_review_average INT,
   listing_review_total INT,
   listing_host_name VARCHAR(50),
   listing_host_photo_url VARCHAR(255),
+  listing_description TEXT, 
   PRIMARY KEY(id)
 
 );
@@ -51,11 +52,5 @@ CREATE TABLE listing_photos (
 	PRIMARY KEY(id)
 
 );
-
--- populating the different tables with some sample data 
-INSERT INTO users (user_name, user_membership_date) VALUES ('JP Vertil', '06/25/2017' );
-INSERT INTO users (user_name, user_membership_date) VALUES ('Jean Luc', '03/22/2016' );
-
-
 
 
