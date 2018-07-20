@@ -28,7 +28,6 @@ beforeEach(async () => {
 
   test('initial title is correct', async () => {
     const div = '#hero h1';
-    //const title = page.$eval(div, e => e.value);
     const title = await page.$eval(div, el => el.textContent);
     console.log(title);
     expect(title).toEqual(' Page is rendering with a React Component ');
