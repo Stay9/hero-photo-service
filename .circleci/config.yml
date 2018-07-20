@@ -16,6 +16,7 @@ jobs:
 
 
     steps:
+      - checkout  # important step
       - run: npm install
       - run: npm test
 
