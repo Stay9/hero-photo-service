@@ -9,14 +9,13 @@ const getListingPhotos = (listingId, whenGotten) => {
       whenGotten(err);
     } else {
       console.log('Database side success in retriving data from the listing_photos table ', res);
-      whenGotten(res);
+      whenGotten(null, res);
     }
   });
 };
 
-module.exports = {
-  getListingPhotos,
-};
-
-
 // getListingPhotos(2, (err, res) =>{}); // testing
+
+module.exports = {
+  query: getListingPhotos,
+};
