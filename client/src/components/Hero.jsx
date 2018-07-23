@@ -1,4 +1,8 @@
 import React from 'react';
+import CSSModules from 'react-css-modules';
+import styles from './hero.css';
+
+console.log(styles, 'ss');
 
 class Hero extends React.Component {
   constructor(props) {
@@ -7,9 +11,10 @@ class Hero extends React.Component {
 
   render() {
     return (
-     <h1> Page is rendering with a React Component </h1>
+     <div className={styles.new}> Page is rendering with a React Component </div>
     );
   }
 }
 
-export default Hero;
+//export default Hero;
+export default CSSModules(Hero, styles);

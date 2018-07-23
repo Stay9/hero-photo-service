@@ -1,4 +1,4 @@
-// model make queries to the hero database
+// model to populate database
 const connection = require('./index.js');
 
 // to populate the users table
@@ -57,6 +57,9 @@ const populateListings = () => {
     locale: ['ruff neighborhood', 'dog park', 'upscale guppie area', 'cowtown'],
   };
 
+  const streetAdr = ['Woof Street', 'Miaw Street', 'Bone Street', 'Toy Street', 'Playground Street', 'Doggy Street', 'Kitty Street', 'Cooltown Street', 'Pet Street', 'Animal Town', 'Zomby Street', 'Thriller Street', 'Treat Street', 'Doggy Street', 'Rat Street', 'Kitten Street']
+  const cities = ['Miami', 'Port-au-Prince', 'Peking', 'Quito', 'Berlin', 'Kingston', 'Lagos', 'Capetown', 'Accra', 'Dakhar', 'Maputo', 'Tokyo', 'Bogota', 'Brasilia', 'London', 'Mexico City'];
+  const countries = ['United States', 'Haiti', 'China', 'Ecuador', 'Germany', 'Jamaica', 'Nigeria', 'South Africa', 'Ghana', 'Senegal', 'Mozambique', 'Japan', 'Columbia', 'Bresil', 'England', 'Mexico'];
   const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 
@@ -77,8 +80,8 @@ const populateListings = () => {
     const listingTotalReviews = Math.floor(Math.random() * 120);
     const listingDesc = populateListingDescriptionsTable();
     const listingHostPhotoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/host${rand0and15}.jpg`;
-
-    const theQuery = `INSERT INTO listings (listing_description, listing_review_average, listing_review_total, listing_host_name, listing_host_photo_url) VALUE ('${listingDesc}', ${listingAverage}, ${listingTotalReviews}, '${hostName[rand0and15]}', '${listingHostPhotoUrl}' )`;
+    const address = `${streetAdr[rand0and15]}, ${cities[rand0and15]}, ${countries[rand0and15]}`;
+    const theQuery = `INSERT INTO listings (listing_description, listing_review_average, listing_review_total, listing_host_name, listing_host_photo_url, listing_address) VALUE ('${listingDesc}', ${listingAverage}, ${listingTotalReviews}, '${hostName[rand0and15]}', '${listingHostPhotoUrl}', '${address}' )`;
     connection.query(theQuery, (err, res) => {
       if (err) {
         console.log('Error in populating the listings table ', err);
@@ -104,25 +107,39 @@ const populateListingsLists = () => {
 };
 
 // to populate the listing_photos table
+// we want each listing to have 2 unique photos (1 to 200) and 13 random photos from indices 201 to 266
 const populateListingPhotos = () => {
   const photoDescriptions = ['comfy bed', 'spacious room', 'where the cool ones stay', 'presidential suite', 'glamorous bed'];
+  let photoCount = 1;
+  let photoId = 0;
   for (let i = 1; i <= 100; i += 1) {
-    const index = Math.floor(Math.random() * 5); // up to 4
-    const rand0and15 = Math.floor(Math.random() * 16);
-    const description = photoDescriptions[index];
-    const photoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry${rand0and15}.jpg`;
 
-    const theQuery = `INSERT INTO listing_photos (photo_description, photo_url) VALUES ('${description}', '${photoUrl}')`;
-    connection.query(theQuery, (err, res) => {
-      if (err) {
-        console.log('Error in populating the listings table ', err);
+    for (let x = 0; x < 15; x += 1) {
+      const index = Math.floor(Math.random() * 5); // up to 4
+      const description = photoDescriptions[index];
+
+      if (x === 0 || x === 1) {
+        photoId = photoCount;
+        photoCount += 1;
       } else {
-        console.log('Success in populating the listings table ', res);
+        photoId =  Math.floor(Math.random()*(266-200+1)+200);
       }
-    });
+      const photoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry${photoId}.jpg`;
+      const theQuery = `INSERT INTO listing_photos (photo_description, photo_url, photo_listing_id) VALUES ('${description}', '${photoUrl}', ${i})`;
+      connection.query(theQuery, (err, res) => {
+        if (err) {
+          console.log('Error in populating the listings table ', err);
+        } else {
+          console.log('Success in populating the listings table ', res);
+        }
+      });
+    }
   }
 };
 
+
+
+// Invoke functions to populate the database
 populateUsers();
 populateLists();
 populateListings();
