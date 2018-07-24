@@ -1,7 +1,48 @@
 .hero {
-  background-color: green;
+/*	background-image: url("https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry134.jpg");
+*/	height: 660px;
+	display: flex;
+	justify-content: space-between;
 }
 
-.new {
-  color: red;
+.hero-buttons {
+	height:30px;
+	width:85px;
+}
+
+.hero-view-photos-button {
+	height:35px;
+	width:115px;
+	font-size: 15px;
+	border-radius: 6px;
+	margin: 13px;
+	align-self: flex-end;
+}
+
+.hero-top-right-buttons {
+	padding: 12px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.hero-share-button {
+	height:35px;
+	width:115px;
+	font-size: 15px;
+	border-radius: 6px;
+	margin:6px;
+}
+
+.hero-save-button {
+	height:35px;
+	width:115px;
+	font-size: 15px;
+	border-radius: 6px;
+	margin:6px;
+}
+
+.hero-button-image {
+	width:18px;
+	height: 16px;
+	margin-right: 7px;
 }

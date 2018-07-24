@@ -57,7 +57,7 @@ const populateListings = () => {
     locale: ['ruff neighborhood', 'dog park', 'upscale guppie area', 'cowtown'],
   };
 
-  const streetAdr = ['Woof Street', 'Miaw Street', 'Bone Street', 'Toy Street', 'Playground Street', 'Doggy Street', 'Kitty Street', 'Cooltown Street', 'Pet Street', 'Animal Town', 'Zomby Street', 'Thriller Street', 'Treat Street', 'Doggy Street', 'Rat Street', 'Kitten Street']
+  const streetAdr = ['Woof Street', 'Miaw Street', 'Bone Street', 'Toy Street', 'Playground Street', 'Doggy Street', 'Kitty Street', 'Cooltown Street', 'Pet Street', 'Animal Town', 'Zomby Street', 'Thriller Street', 'Treat Street', 'Doggy Street', 'Rat Street', 'Kitten Street'];
   const cities = ['Miami', 'Port-au-Prince', 'Peking', 'Quito', 'Berlin', 'Kingston', 'Lagos', 'Capetown', 'Accra', 'Dakhar', 'Maputo', 'Tokyo', 'Bogota', 'Brasilia', 'London', 'Mexico City'];
   const countries = ['United States', 'Haiti', 'China', 'Ecuador', 'Germany', 'Jamaica', 'Nigeria', 'South Africa', 'Ghana', 'Senegal', 'Mozambique', 'Japan', 'Columbia', 'Bresil', 'England', 'Mexico'];
   const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
@@ -113,7 +113,6 @@ const populateListingPhotos = () => {
   let photoCount = 1;
   let photoId = 0;
   for (let i = 1; i <= 100; i += 1) {
-
     for (let x = 0; x < 15; x += 1) {
       const index = Math.floor(Math.random() * 5); // up to 4
       const description = photoDescriptions[index];
@@ -122,7 +121,7 @@ const populateListingPhotos = () => {
         photoId = photoCount;
         photoCount += 1;
       } else {
-        photoId =  Math.floor(Math.random()*(266-200+1)+200);
+        photoId = Math.floor(Math.random() * (266 - 200 + 1) + 200);
       }
       const photoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry${photoId}.jpg`;
       const theQuery = `INSERT INTO listing_photos (photo_description, photo_url, photo_listing_id) VALUES ('${description}', '${photoUrl}', ${i})`;
@@ -136,7 +135,6 @@ const populateListingPhotos = () => {
     }
   }
 };
-
 
 
 // Invoke functions to populate the database
