@@ -13,6 +13,9 @@ class Gallery extends React.Component {
       mainPhotoIndex: 0,
       carrBeginIndex: 0,
       carrEndIndex: 10,
+      displayCarr: true,
+      detailedMessage: 'Hide photo list',
+      triangleSymbol: './downtriangle.png',
     };
   }
 
@@ -69,28 +72,39 @@ class Gallery extends React.Component {
     console.log('clicked ', newMainPhoUrl, newMainPhotoIndex);
   }
 
+  toggleCarrousel() {
+    const isDisp = this.state.displayCarr;
+    this.setState({ displayCarr: !isDisp });
+
+    const detMes = this.state.detailedMessage;
+    let newMes = '';
+    let newTriangle = '';
+    if (detMes === 'Hide photo list') {
+      newMes = 'Show photo list';
+      newTriangle = './uptriangle.png'
+    } else {
+      newMes = 'Hide photo list';
+      newTriangle = './downtriangle.png'
+    }
+
+    this.setState({ detailedMessage: newMes }, () => {
+      this.setState({ triangleSymbol: newTriangle });
+    });
+  }
+
+  showCarrousel() {
+    this.setState({ displayCarr: true });
+    this.setState({ detailedMessage: 'Hide photo list' }, () => {
+      this.setState({ triangleSymbol:'./downtriangle.png' });
+    });
+
+  }
+
 
   render() {
-    return (
-      <div styleName="gallery">
-        <div styleName="xbutton-container">
-          <img onClick={this.props.onClick} src="./xsymbol.png" styleName="xbutton" />
-        </div>
 
-        <div styleName="prevnext-container">
-          <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="./prevsymbol.png" />
-          <img onClick={this.showNextPhoto.bind(this)} styleName="main-image" src={this.state.mainPhoto} />
-          <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="./nextsymbol.png" />
-        </div>
-
-        <div styleName="details-container">
-          <div styleName="details">
-            <p> { this.state.mainPhotoIndex + 1 }/{ this.props.galleryPhotos.length }  { this.props.galleryPhotos[this.state.mainPhotoIndex].photo_description } </p>
-            <p> Hide Photo List </p>
-          </div>
-        </div>
-
-        <div styleName="carrousel-container">
+    const theCarrousel = this.state.displayCarr ? (
+      <div styleName="carrousel-container">
           <div styleName="carrousel">
             {
 
@@ -117,6 +131,27 @@ class Gallery extends React.Component {
               }
           </div>
         </div>
+      ) : null;
+    return (
+      <div styleName="gallery">
+        <div styleName="xbutton-container">
+          <img onClick={this.props.onClick} src="./xsymbol.png" styleName="xbutton" />
+        </div>
+
+        <div styleName="prevnext-container">
+          <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="./prevsymbol.png" />
+          <img onClick={this.showNextPhoto.bind(this)} styleName="main-image" src={this.state.mainPhoto} />
+          <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="./nextsymbol.png" />
+        </div>
+
+        <div onMouseEnter={this.showCarrousel.bind(this)} styleName="details-container">
+          <div styleName="details">
+            <p> { this.state.mainPhotoIndex + 1 }/{ this.props.galleryPhotos.length }  { this.props.galleryPhotos[this.state.mainPhotoIndex].photo_description } </p>
+            <p onClick={this.toggleCarrousel.bind(this)}> {this.state.detailedMessage} <img styleName="triangle-symbol" src={this.state.triangleSymbol}/> </p>
+          </div>
+        </div>
+
+        {theCarrousel}
 
       </div>
     );
