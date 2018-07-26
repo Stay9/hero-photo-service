@@ -35,11 +35,26 @@
   	height: 600px;
 }
 
+.-gallery-details-container-1oRb9U- {
+	display: flex;
+	justify-content: center;
+	
+}
+
+.-gallery-details-_8BmN-- {
+	width: 975px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
 .-gallery-carrousel-container-2R3IKb- {
 	margin-bottom: 30px;
 	display: flex;
 	justify-content: center;
 }
+
+
 
 .-gallery-carrousel-rC8kEU- {
 	width: 975px;
@@ -49,6 +64,7 @@
 	align-items: center;
 
 }
+
 
 .-gallery-carrousel-photo-13p7-6- {
 	filter: brightness(50%);

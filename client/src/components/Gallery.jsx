@@ -10,7 +10,7 @@ class Gallery extends React.Component {
     this.state = {
       photos: this.props.galleryPhotos,
       mainPhoto: this.props.galleryPhotos[0].photo_url,
-      mainPhotoIndex: 1,
+      mainPhotoIndex: 0,
       carrBeginIndex: 0,
       carrEndIndex: 10,
     };
@@ -81,6 +81,13 @@ class Gallery extends React.Component {
           <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="./prevsymbol.png" />
           <img onClick={this.showNextPhoto.bind(this)} styleName="main-image" src={this.state.mainPhoto} />
           <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="./nextsymbol.png" />
+        </div>
+
+        <div styleName="details-container">
+          <div styleName="details">
+            <p> { this.state.mainPhotoIndex + 1 }/{ this.props.galleryPhotos.length }  { this.props.galleryPhotos[this.state.mainPhotoIndex].photo_description } </p>
+            <p> Hide Photo List </p>
+          </div>
         </div>
 
         <div styleName="carrousel-container">
