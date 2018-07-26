@@ -111,8 +111,7 @@
 	width: 570px;
 	height: 670px;
 	display: flex;
-/*	justify-content: space-between;
-*/	flex-direction: column;
+	flex-direction: column;
 }
 
 .-save-xbutton-container-1Kz-Vj- {

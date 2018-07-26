@@ -9,8 +9,7 @@
 	width: 570px;
 	height: 670px;
 	display: flex;
-/*	justify-content: space-between;
-*/	flex-direction: column;
+	flex-direction: column;
 }
 
 .xbutton-container {

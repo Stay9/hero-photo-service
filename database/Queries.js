@@ -16,6 +16,22 @@ const getListingPhotos = (listingId, whenGotten) => {
 
 // getListingPhotos(2, (err, res) =>{}); // testing
 
+const getLists = (userId, whenGotten) => {
+  const theQuery = `SELECT * FROM lists WHERE list_user_id = ${userId}`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in retrieving data from the lists table ', err);
+      whenGotten(err);
+    } else {
+      console.log('Database side success in retrieving data from the lists table ', res);
+      whenGotten(res);
+    }
+  });
+};
+
+getLists(4, (err, res) => {});
+
 module.exports = {
   query: getListingPhotos,
+  getLists: getLists,
 };
