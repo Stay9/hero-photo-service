@@ -27,12 +27,12 @@
 	width: 25px;
 	height: 25px;
 	margin:30px;
-	margin-top: 450px;
+	margin-top: 250px;
 }
 
 .-gallery-main-image-2ZTjBT- {
-  	width: 950px;
-  	height: 700px;
+  	width: 800px;
+  	height: 600px;
 }
 
 .-gallery-carrousel-container-2R3IKb- {
@@ -51,6 +51,14 @@
 }
 
 .-gallery-carrousel-photo-13p7-6- {
+	filter: brightness(50%);
+	width:100px;
+	height:67px;
+	margin: 5px;
+
+}
+
+.-gallery-carrousel-photo-selected-3O89MT- {
 	width:100px;
 	height:67px;
 	margin: 5px;

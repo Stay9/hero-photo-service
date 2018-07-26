@@ -1,7 +1,8 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
-import GalleryModal from './GalleryModal.jsx';
 import axios from 'axios';
+import Modal from './Modal.jsx';
+import Gallery from './Gallery.jsx';
 import styles from './hero.css';
 
 class Hero extends React.Component {
@@ -9,6 +10,8 @@ class Hero extends React.Component {
     super(props);
     this.state = {
       showGalleryModal: false,
+      showShareModal: false,
+      showSaveModal: false,
       heroUrl: '',
       photos: [],
     };
@@ -22,15 +25,31 @@ class Hero extends React.Component {
   }
 
   handleShowGallery() {
-  	this.setState({ showGalleryModal: true });
+    this.setState({ showGalleryModal: true });
   }
 
   handleHideGallery() {
-  	this.setState({ showGalleryModal: false });
+    this.setState({ showGalleryModal: false });
+  }
+
+  handleShowShare() {
+    this.setState({ showShareModal: true });
+  }
+
+  handleHideShare() {
+    this.setState({ showShareModal: false });
+  }
+
+  handleShowSave() {
+    this.setState({ showSaveModal: true });
+  }
+
+  handleHideSave() {
+    this.setState({ showSaveModal: false });
   }
 
   getListingPhotos() {
-    axios.get('/listings/45/photos')
+    axios.get('/listings/100/photos')
       .then((response) => {
         console.log('Listings photos data: ', response.data);
         this.setState({ heroUrl: response.data[0].photo_url });
@@ -49,16 +68,11 @@ class Hero extends React.Component {
     };
 
     const modal = this.state.showGalleryModal ? (
-      <GalleryModal>
+      <Modal>
         <div styleName="modal">
-          <div>
-            With a portal, we can render content into a different
-            part of the DOM, as if it were any other React child.
-          </div>
-          This is being rendered inside the #modal-container div.
-          <button onClick={this.handleHideGallery}>Hide modal</button>
+          <Gallery galleryPhotos={this.state.photos} onClick={this.handleHideGallery.bind(this)} />
         </div>
-      </GalleryModal>
+      </Modal>
     ) : null;
 
     return (

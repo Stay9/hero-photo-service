@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-const galleryModal = document.getElementById('gallery');
 
-class GalleryModal extends React.Component {
+const modal = document.getElementById('gallery');
+
+class Modal extends React.Component {
   constructor(props) {
     super(props);
     // creating a div that we'll render the modal into
@@ -11,12 +12,12 @@ class GalleryModal extends React.Component {
 
   componentDidMount() {
     // append the element into the DOM on mount
-    galleryModal.appendChild(this.el);
+    modal.appendChild(this.el);
   }
 
   componentWillUnmount() {
     // remove the element from the DOM when we unmount
-    galleryModal.removeChild(this.el);
+    modal.removeChild(this.el);
   }
 
   render() {
@@ -25,4 +26,4 @@ class GalleryModal extends React.Component {
   }
 }
 
-export default GalleryModal;
+export default Modal;

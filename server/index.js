@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const Queries = require('../database/Queries.js');
+
 const app = express();
 
 // making a middleware to tarck all incoming requests

@@ -1,6 +1,5 @@
 .hero {
-/*	background-image: url("https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry134.jpg");
-*/	height: 660px;
+    height: 660px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -48,7 +47,7 @@
 }
 
 .modal {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0.8,0.8,0.8,0.8);
   position: fixed;
   height: 100%;
   width: 100%;
