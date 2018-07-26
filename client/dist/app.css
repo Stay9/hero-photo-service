@@ -1,6 +1,40 @@
-.-hero-hero-1OvWjm- {
-/*	background-image: url("https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/entry134.jpg");
-*/	height: 660px;
+.-gallery-gallery-10td6T- {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+.-gallery-xbutton-container-33-hD6- {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.-gallery-xbutton-3Qqyiy- {
+	margin-right: 50px;
+	margin-top: 27px;
+	height: 30px;
+	width: 30px;
+}
+
+.-gallery-prevnext-container-hYxOTH- {
+	display: flex;
+	justify-content: space-between;
+}
+
+.-gallery-prevnext-image-3K-gk1- {
+	width: 25px;
+	height: 25px;
+	margin:30px;
+	margin-top: 450px;
+}
+
+.-gallery-main-image-2ZTjBT- {
+  	width: 700px;
+  	height: 1000px;
+}.-hero-hero-1OvWjm- {
+    height: 660px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -48,7 +82,7 @@
 }
 
 .-hero-modal-3kpy1o- {
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0.8,0.8,0.8,0.8);
   position: fixed;
   height: 100%;
   width: 100%;
