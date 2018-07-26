@@ -31,9 +31,43 @@
 }
 
 .-gallery-main-image-2ZTjBT- {
-  	width: 700px;
-  	height: 1000px;
-}.-hero-hero-1OvWjm- {
+  	width: 950px;
+  	height: 700px;
+}
+
+.-gallery-carrousel-container-2R3IKb- {
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: center;
+}
+
+.-gallery-carrousel-rC8kEU- {
+	width: 975px;
+	display:flex;
+	justify-content: center;
+	flex-direction: row;
+	align-items: center;
+
+}
+
+.-gallery-carrousel-photo-13p7-6- {
+	width:100px;
+	height:67px;
+	margin: 5px;
+
+}
+
+.-gallery-first-photo-holder-1e9KJT- {
+	width: 50px;
+	visibility: hidden;
+	overflow: show;
+}
+
+.-gallery-last-photo-holder-3WNnP0- {
+	width: 50px;
+	overflow: hidden;
+}
+.-hero-hero-1OvWjm- {
     height: 660px;
 	display: flex;
 	justify-content: space-between;
