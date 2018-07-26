@@ -49,7 +49,7 @@ class Hero extends React.Component {
   }
 
   getListingPhotos() {
-    axios.get('/listings/100/photos')
+    axios.get('/listings/16/photos')
       .then((response) => {
         console.log('Listings photos data: ', response.data);
         this.setState({ heroUrl: response.data[0].photo_url });
