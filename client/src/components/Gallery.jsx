@@ -23,18 +23,18 @@ class Gallery extends React.Component {
     console.log('da fotos! ', this.state.photos);
   }
 
-    updateCarrousel() {
+  updateCarrousel() {
     if (this.state.mainPhotoIndex <= 4) {
       this.setState({ carrBeginIndex: 0 });
       this.setState({ carrEndIndex: 10 });
     } else if (this.state.mainPhotoIndex > 4 && this.state.mainPhotoIndex < 10 && this.state.mainPhotoIndex < this.state.photos.length) {
-        this.setState({ carrBeginIndex: this.state.mainPhotoIndex - 5 });
-        this.setState({ carrEndIndex: this.state.mainPhotoIndex + 5 });
+      this.setState({ carrBeginIndex: this.state.mainPhotoIndex - 5 });
+      this.setState({ carrEndIndex: this.state.mainPhotoIndex + 5 });
     } else {
       this.setState({ carrBeginIndex: this.state.photos.length - 11 });
-      this.setState({ carrEndIndex: this.state.photos.length -1 });
+      this.setState({ carrEndIndex: this.state.photos.length - 1 });
     }
-    console.log('begin: ', this.state.mainPhotoIndex );
+    console.log('begin: ', this.state.mainPhotoIndex);
     console.log('end: ', this.state.carrEndIndex);
   }
 
@@ -66,7 +66,7 @@ class Gallery extends React.Component {
     });
   }
 
-  showClickedPhoto (newMainPhoUrl, newMainPhotoIndex) {
+  showClickedPhoto(newMainPhoUrl, newMainPhotoIndex) {
     this.setState({ mainPhoto: newMainPhoUrl });
     this.setState({ mainPhotoIndex: newMainPhotoIndex });
     console.log('clicked ', newMainPhoUrl, newMainPhotoIndex);
@@ -81,10 +81,10 @@ class Gallery extends React.Component {
     let newTriangle = '';
     if (detMes === 'Hide photo list') {
       newMes = 'Show photo list';
-      newTriangle = './uptriangle.png'
+      newTriangle = './uptriangle.png';
     } else {
       newMes = 'Hide photo list';
-      newTriangle = './downtriangle.png'
+      newTriangle = './downtriangle.png';
     }
 
     this.setState({ detailedMessage: newMes }, () => {
@@ -95,43 +95,41 @@ class Gallery extends React.Component {
   showCarrousel() {
     this.setState({ displayCarr: true });
     this.setState({ detailedMessage: 'Hide photo list' }, () => {
-      this.setState({ triangleSymbol:'./downtriangle.png' });
+      this.setState({ triangleSymbol: './downtriangle.png' });
     });
-
   }
 
 
   render() {
-
     const theCarrousel = this.state.displayCarr ? (
       <div styleName="carrousel-container">
-          <div styleName="carrousel">
-            {
+        <div styleName="carrousel">
+          {
 
               this.state.photos.map((photo, index) => {
                 if (this.state.mainPhoto === photo.photo_url) {
-                  return <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo-selected" src={photo.photo_url}/>
+                  return <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo-selected" src={photo.photo_url} />;
                 }
                 if (index === this.state.carrBeginIndex) {
                   return (
                     <div styleName="last-photo-holder">
-                      <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />
+                      <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />
                     </div>
                   );
                 } if (index > this.state.carrBeginIndex + 1 && index < this.state.carrEndIndex) {
-                  return <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />;
+                  return <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />;
                 } if (index === this.state.carrEndIndex) {
                   return (
                     <div styleName="last-photo-holder">
-                      <img  onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />
+                      <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />
                     </div>
                   );
                 }
               })
               }
-          </div>
         </div>
-      ) : null;
+      </div>
+    ) : null;
     return (
       <div styleName="gallery">
         <div styleName="xbutton-container">
@@ -146,8 +144,22 @@ class Gallery extends React.Component {
 
         <div onMouseEnter={this.showCarrousel.bind(this)} styleName="details-container">
           <div styleName="details">
-            <p> { this.state.mainPhotoIndex + 1 }/{ this.props.galleryPhotos.length }  { this.props.galleryPhotos[this.state.mainPhotoIndex].photo_description } </p>
-            <p onClick={this.toggleCarrousel.bind(this)}> {this.state.detailedMessage} <img styleName="triangle-symbol" src={this.state.triangleSymbol}/> </p>
+            <p>
+              {' '}
+              { this.state.mainPhotoIndex + 1 }
+               /
+              { this.props.galleryPhotos.length }
+              {' '}
+              { this.props.galleryPhotos[this.state.mainPhotoIndex].photo_description }
+              {' '}
+            </p>
+            <p onClick={this.toggleCarrousel.bind(this)}>
+              {' '}
+              {this.state.detailedMessage}
+              {' '}
+              <img styleName="triangle-symbol" src={this.state.triangleSymbol} />
+              {' '}
+            </p>
           </div>
         </div>
 

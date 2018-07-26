@@ -3,6 +3,7 @@ import CSSModules from 'react-css-modules';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 import Gallery from './Gallery.jsx';
+import Save from './Save.jsx';
 import styles from './hero.css';
 
 class Hero extends React.Component {
@@ -18,6 +19,10 @@ class Hero extends React.Component {
 
     this.handleShowGallery = this.handleShowGallery.bind(this);
     this.handleHideGallery = this.handleHideGallery.bind(this);
+    this.handleShowShare = this.handleShowShare.bind(this);
+    this.handleHideShare = this.handleHideShare.bind(this);
+    this.handleShowSave = this.handleShowSave.bind(this);
+    this.handleHideSave = this.handleHideSave.bind(this);
   }
 
   componentDidMount() {
@@ -49,7 +54,7 @@ class Hero extends React.Component {
   }
 
   getListingPhotos() {
-    axios.get('/listings/100/photos')
+    axios.get('/listings/90/photos')
       .then((response) => {
         console.log('Listings photos data: ', response.data);
         this.setState({ heroUrl: response.data[0].photo_url });
@@ -67,13 +72,34 @@ class Hero extends React.Component {
       backgroundImage: `url(${imgUrl})`,
     };
 
-    const modal = this.state.showGalleryModal ? (
+    let modal = null;
+    if (this.state.showGalleryModal === true) {
+    	modal = (
       <Modal>
-        <div styleName="modal">
+        <div styleName="modal-dark-black">
           <Gallery galleryPhotos={this.state.photos} onClick={this.handleHideGallery.bind(this)} />
         </div>
       </Modal>
-    ) : null;
+      );
+    } else if (this.state.showShareModal === true) {
+    	modal = (
+      <Modal>
+        <div styleName="modal-dark-black">
+          <Gallery galleryPhotos={this.state.photos} onClick={this.handleHideShare.bind(this)} />
+        </div>
+      </Modal>
+      );
+    } else if (this.state.showSaveModal === true) {
+    	modal = (
+      <Modal>
+        <div styleName="modal-white">
+          <Save galleryPhotos={this.state.heroUrl} onClick={this.handleHideSave.bind(this)} />
+        </div>
+      </Modal>
+      );
+    } else {
+    	modal = null;
+    }
 
     return (
       <div style={divStyle} styleName="hero">
@@ -86,7 +112,7 @@ View Photos
             <img styleName="hero-button-image" src="./sharesymbol.png" />
               Share
           </button>
-          <button styleName="hero-save-button">
+          <button styleName="hero-save-button" onClick={this.handleShowSave}>
             <img styleName="hero-button-image" src="./savesymbol.png" />
               Save
           </button>
