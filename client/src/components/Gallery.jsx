@@ -63,6 +63,12 @@ class Gallery extends React.Component {
     });
   }
 
+  showClickedPhoto (newMainPhoUrl, newMainPhotoIndex) {
+    this.setState({ mainPhoto: newMainPhoUrl });
+    this.setState({ mainPhotoIndex: newMainPhotoIndex });
+    console.log('clicked ', newMainPhoUrl, newMainPhotoIndex);
+  }
+
 
   render() {
     return (
@@ -73,7 +79,7 @@ class Gallery extends React.Component {
 
         <div styleName="prevnext-container">
           <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="./prevsymbol.png" />
-          <img styleName="main-image" src={this.state.mainPhoto} />
+          <img onClick={this.showNextPhoto.bind(this)} styleName="main-image" src={this.state.mainPhoto} />
           <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="./nextsymbol.png" />
         </div>
 
@@ -83,20 +89,20 @@ class Gallery extends React.Component {
 
               this.state.photos.map((photo, index) => {
                 if (this.state.mainPhoto === photo.photo_url) {
-                  return <img styleName="carrousel-photo-selected" src={photo.photo_url}/>
+                  return <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo-selected" src={photo.photo_url}/>
                 }
                 if (index === this.state.carrBeginIndex) {
                   return (
                     <div styleName="last-photo-holder">
-                      <img styleName="carrousel-photo" src={photo.photo_url} />
+                      <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />
                     </div>
                   );
                 } if (index > this.state.carrBeginIndex + 1 && index < this.state.carrEndIndex) {
-                  return <img styleName="carrousel-photo" src={photo.photo_url} />;
+                  return <img onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />;
                 } if (index === this.state.carrEndIndex) {
                   return (
                     <div styleName="last-photo-holder">
-                      <img styleName="carrousel-photo" src={photo.photo_url} />
+                      <img  onClick={()=> {this.showClickedPhoto(photo.photo_url, index)}} styleName="carrousel-photo" src={photo.photo_url} />
                     </div>
                   );
                 }
