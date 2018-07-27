@@ -15,6 +15,7 @@ class Save extends React.Component {
     	newListName: '',
     	listingId: 0,
     	favoriteListsObj: {},
+    	ratings: [1,1,0,0],
     };
   }
 
@@ -155,6 +156,9 @@ Create
     	theNewListInfo = null;
     }
 
+    	
+    
+
   	return (
     <div styleName="save-container">
       <div styleName="save">
@@ -196,6 +200,43 @@ Save to list
           </div>
 
         </div>
+
+
+
+        <div styleName="footer-container">
+	        <div styleName="footer">
+	          <div>
+	            <img styleName="footer-hero-pic" src={this.props.heroUrl}/>
+	          </div>
+
+	          <div styleName="footer-text-and-review-container">
+
+	            <div styleName="footer-description-container">
+	              <div styleName="footer-description"> Listing Description will go here </div>
+	            </div>
+
+	            <div styleName="footer-address-container">
+	             <div styleName="footer-address"> Address will go here </div>
+	            </div>
+
+	            <div styleName="footer-paws-container">
+	              <div styleName="footer-paws">
+		             {
+		               this.state.ratings.map((rating) => {
+		               	if(rating === 1) {
+		               		return <img styleName="paw" src="./full.png"/>
+		               	} else if (rating === 0) {
+		               		return <img styleName="paw" src="./grey.png"/>
+		               	}
+		               })
+		             }
+		          </div>
+	            </div>
+
+	          </div>
+
+	        </div>
+	     </div>
 
       </div>
     </div>

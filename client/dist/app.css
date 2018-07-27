@@ -248,6 +248,77 @@
 
 }
 
+.-save-footer-container-3JQJ0_- {
+	width: 100%;
+	margin-top:140px;
+	margin-bottom: 10px;
+	display: flex;
+	justify-content: flex-start;
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
+	height: 120px;
+
+}
+
+.-save-footer-3j47Ln- {
+	display: flex;
+	justify-content: flex-start;
+	height: 80px;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+.-save-footer-hero-pic-3I1RzW- {
+	width: 100px;
+	height: 80px;
+}
+
+.-save-footer-text-and-review-container-2FiAaG- {
+	margin-left: 10px;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+}
+
+.-save-footer-description-container-TJaQw_- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-save-footer-description-2uzutC- {
+	font-weight: bold;
+	font-size: 16px;
+	color:#484848;
+}
+
+.-save-footer-address-container-49MEW_- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-save-footer-address-2zZ_ey- {
+	color:#484848;
+	font-size: 15px;
+}
+
+.-save-footer-paws-container-sxq88j- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-save-footer-paws-1bz3Yf- {
+	display: flex;
+	justify-content: flex-start;
+	
+}
+
+.-save-paw-PG-K9O- {
+	width: 16px;
+	height: 16px;
+	margin-right: 4px;
+}
+
+
+
 .-hero-hero-1OvWjm- {
     height: 500px;
 	display: flex;
