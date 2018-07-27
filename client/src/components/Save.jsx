@@ -10,10 +10,10 @@ class Save extends React.Component {
     this.state = {
     	showCreateNewListMessage: true,
     	showNewListInfo: false,
-    	userId: 8,
+    	userId: 0,
     	lists: [],
     	newListName: '',
-    	listingId: 8,
+    	listingId: 0,
     	favoriteListsObj: {},
     };
   }
@@ -21,6 +21,8 @@ class Save extends React.Component {
   componentDidMount() {
   	this.setState({ lists: this.props.lists });
   	this.setState({ favoriteListsObj: this.props.favoriteListsObj });
+  	this.setState({ userId: this.props.userId });
+  	this.setState({ listingId: this.props.listingId });
   }
 
   componentDidUpdate(prevProps) {
@@ -30,6 +32,14 @@ class Save extends React.Component {
 
   	if (this.props.favoriteListsObj !== prevProps.favoriteListsObj) {
   		this.setState({ favoriteListsObj: this.props.favoriteListsObj });
+  	}
+
+  	if (this.props.userId !== prevProps.userId) {
+  		this.setState({ userId: this.props.userId });
+  	}
+
+  	if (this.props.listingId !== prevProps.listingId) {
+  		this.setState({ listingId: this.props.listingId });
   	}
   }
 

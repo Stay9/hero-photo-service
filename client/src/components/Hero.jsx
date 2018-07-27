@@ -19,9 +19,9 @@ class Hero extends React.Component {
       savebuttonSymbol: '',
       saveButtonText: '',
       numberOfFav: 0,
-      userId: 8,
+      userId: 12,
       lists: [],
-      listingId: 8,
+      listingId: 12,
       favoriteLists: [],
       favoriteListsObj: {},
     };
@@ -78,7 +78,7 @@ class Hero extends React.Component {
   }
 
   getListingPhotos() {
-    axios.get('/listings/90/photos')
+    axios.get(`/listings/${this.state.listingId}/photos`)
       .then((response) => {
         this.setState({ heroUrl: response.data[0].photo_url });
         this.setState({ photos: response.data });
@@ -192,7 +192,7 @@ class Hero extends React.Component {
     	modal = (
       <Modal>
         <div styleName="modal-white">
-          <Save galleryPhotos={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} onClick={this.handleSaveOnclicks.bind(this)} />
+          <Save galleryPhotos={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} userId={this.state.userId} listingId={this.state.listingId} onClick={this.handleSaveOnclicks.bind(this)} />
         </div>
       </Modal>
       );
