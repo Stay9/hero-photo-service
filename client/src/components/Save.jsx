@@ -77,7 +77,7 @@ class Save extends React.Component {
   			this.props.onClick(2);
   		})
   		.catch((error) => {
-  			console.log('Error in axios in delete favorite');
+  			console.log('Error in axios in delete favorite', error);
   		});
   	} else {
   		// This is not liked, must now add
@@ -87,7 +87,7 @@ class Save extends React.Component {
   			this.props.onClick(2);
   		})
   		.catch((error) => {
-  			console.log('Error in axios in adding new favorite');
+  			console.log('Error in axios in adding new favorite', error);
   		});
   	}
   }

@@ -18,6 +18,7 @@ class Hero extends React.Component {
       saveStatus: false,
       savebuttonSymbol: '',
       saveButtonText: '',
+      numberOfFav: 0,
       userId: 8,
       lists: [],
       listingId: 8,
@@ -55,7 +56,21 @@ class Hero extends React.Component {
   }
 
   handleShowSave() {
-    this.setState({ showSaveModal: true });
+  	console.log('number of favs ', this.state.numberOfFav);
+  	if (this.state.numberOfFav === 0 || this.state.numberOfFav > 1) {
+  	 this.setState({ showSaveModal: true });
+  	} else if (this.state.numberOfFav === 1) {
+  		const listId = Object.keys(this.state.favoriteListsObj)[0]; // the one and only current favorite
+  		axios.delete(`/listings/${this.state.listingId}/lists/${listId}`)
+  		.then((response) => {
+  			console.log(response);
+  			
+  			this.getListsOfListing();
+  		})
+  		.catch((error) => {
+  			console.log('Error in axios in delete favorite', error);
+  		});
+  	}
   }
 
   handleHideSave() {
@@ -73,9 +88,6 @@ class Hero extends React.Component {
       });
   }
 
-  toggleSaveButton() {
-  	console.log('Operate');
-  }
 
   handleSaveOnclicks(identifier) { // helpful in case one wants to pass in multiple functions to one component
   	if (identifier === 1) { // to close the modal
@@ -107,13 +119,17 @@ class Hero extends React.Component {
 
       	const tempLists = response.data;
       	let isAtLeastOneList = false;
+      	let theNumberOfFavs = 0;
 
 
       	const objectOfFavLists = {};
   	  	for (let i = 0; i < this.state.favoriteLists.length; i++) {
+  	  		theNumberOfFavs += 1;
   	  		objectOfFavLists[this.state.favoriteLists[i].list_id] = 'aaa';
   	  		isAtLeastOneList = true;
   	  	}
+
+  	  	this.setState({ numberOfFav: theNumberOfFavs });
 
   	  	if (isAtLeastOneList === true) {
   	  		this.setState({ saveButtonText: 'Saved' }, () => {
