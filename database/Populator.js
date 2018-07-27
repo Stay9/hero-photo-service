@@ -76,7 +76,7 @@ const populateListings = () => {
   for (let i = 1; i <= 100; i += 1) {
     // generate random number between 1 and 5
     const rand0and15 = Math.floor(Math.random() * 16); // up to index 15
-    const listingAverage = Math.floor(Math.random() * 5) + 1;
+    const listingAverage = Math.floor(Math.random() * 4); // up to 4
     const listingTotalReviews = Math.floor(Math.random() * 120);
     const listingDesc = populateListingDescriptionsTable();
     const listingHostPhotoUrl = `https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/listings/host${rand0and15}.jpg`;

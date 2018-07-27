@@ -89,6 +89,21 @@ const removeFromFavorite = (listingId, listId, whenDone) => {
 
 // removeFromFavorite(100, 100, () => {});
 
+const getListingDetails = (listingId, whenGotten) => {
+  const theQuery = `SELECT * FROM listings WHERE id = ${listingId}`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in retrieving data from the listings table ', err);
+      whenGotten(err);
+    } else {
+      console.log('Databas side success in retrieving data from the listings table ', res);
+      whenGotten(null, res);
+    }
+  });
+};
+
+// getListingDetails(13, () => {});
+
 module.exports = {
   getListingPhotos,
   getLists,
@@ -96,4 +111,5 @@ module.exports = {
   getListsOfListing,
   addToFavorite,
   removeFromFavorite,
+  getListingDetails,
 };

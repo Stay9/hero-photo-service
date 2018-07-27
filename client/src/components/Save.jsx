@@ -15,7 +15,8 @@ class Save extends React.Component {
     	newListName: '',
     	listingId: 0,
     	favoriteListsObj: {},
-    	ratings: [1,1,0,0],
+    	ratings: [0, 0, 0, 0],
+    	details: {},
     };
   }
 
@@ -23,7 +24,9 @@ class Save extends React.Component {
   	this.setState({ lists: this.props.lists });
   	this.setState({ favoriteListsObj: this.props.favoriteListsObj });
   	this.setState({ userId: this.props.userId });
-  	this.setState({ listingId: this.props.listingId });
+  	this.setState({ listingId: this.props.listingId }, () => {
+  		this.getListingDetails();
+  	});
   }
 
   componentDidUpdate(prevProps) {
@@ -103,6 +106,33 @@ class Save extends React.Component {
   	}
   }
 
+  getListingDetails() {
+  	axios.get(`/listings/${this.state.listingId}/details`)
+  	 .then((response) => {
+        this.setState({ details: response.data[0] }, () => {
+        	this.setReviewArray();
+        	console.log('the details', this.state.details);
+        });
+      })
+      .catch((error) => {
+        console.log('Axios error in getting listing photos ', error);
+      });
+  }
+
+  setReviewArray() {
+  	const outputArr = [];
+  	let paws = this.state.details.listing_review_average;
+  	for (let i = 0; i < 4; i++) {
+  		if (paws > 0) {
+  			outputArr.push(1);
+  			paws -= 1;
+  		} else {
+  			outputArr.push(0);
+  		}
+  	}
+  	this.setState({ ratings: outputArr });
+  }
+
   render() {
     let theNewListMessage = null;
     let theNewListInfo = null;
@@ -156,8 +186,6 @@ Create
     	theNewListInfo = null;
     }
 
-    	
-    
 
   	return (
     <div styleName="save-container">
@@ -202,41 +230,56 @@ Save to list
         </div>
 
 
-
         <div styleName="footer-container">
-	        <div styleName="footer">
-	          <div>
-	            <img styleName="footer-hero-pic" src={this.props.heroUrl}/>
-	          </div>
+          <div styleName="footer">
+            <div>
+              <img styleName="footer-hero-pic" src={this.props.heroUrl} />
+            </div>
 
-	          <div styleName="footer-text-and-review-container">
+            <div styleName="footer-text-and-review-container">
 
-	            <div styleName="footer-description-container">
-	              <div styleName="footer-description"> Listing Description will go here </div>
-	            </div>
+              <div styleName="footer-description-container">
+                <div styleName="footer-description">
+                  {' '}
+                  {this.state.details.listing_description}
+                  {' '}
+                </div>
+              </div>
 
-	            <div styleName="footer-address-container">
-	             <div styleName="footer-address"> Address will go here </div>
-	            </div>
+              <div styleName="footer-address-container">
+                <div styleName="footer-address">
+                  {' '}
+                  {this.state.details.listing_address}
+                  {' '}
+                </div>
+              </div>
 
-	            <div styleName="footer-paws-container">
-	              <div styleName="footer-paws">
-		             {
+              <div styleName="footer-paws-container">
+                <div styleName="footer-paws">
+                  {
 		               this.state.ratings.map((rating) => {
-		               	if(rating === 1) {
-		               		return <img styleName="paw" src="./full.png"/>
-		               	} else if (rating === 0) {
-		               		return <img styleName="paw" src="./grey.png"/>
+		               	if (rating === 1) {
+		               		return <img styleName="paw" src="./full.png" />;
+		               	} if (rating === 0) {
+		               		return <img styleName="paw" src="./grey.png" />;
 		               	}
 		               })
 		             }
-		          </div>
-	            </div>
+                </div>
 
-	          </div>
+                <div styleName="number-reviews">
+                  {this.state.details.listing_review_total}
+                  {' '}
+Reviews
 
-	        </div>
-	     </div>
+                  {' '}
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
 
       </div>
     </div>

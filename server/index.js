@@ -104,6 +104,19 @@ app.delete('/listings/:listing_id/lists/:list_id', (req, res) => {
   });
 });
 
+app.get('/listings/:listing_id/details', (req, res) => {
+  const listingId = req.params.listing_id;
+
+  Queries.getListingDetails(listingId, (err, results) => {
+    if (err) {
+      console.log('Server side error in querying listings');
+    } else {
+      console.log('Server side success in querrying listings');
+      res.json(results);
+    }
+  });
+});
+
 app.listen(3000, (err) => {
   if (err) {
     console.log('Error connecting to the port :', err);

@@ -19,9 +19,9 @@ class Hero extends React.Component {
       savebuttonSymbol: '',
       saveButtonText: '',
       numberOfFav: 0,
-      userId: 12,
+      userId: 15,
       lists: [],
-      listingId: 12,
+      listingId: 15,
       favoriteLists: [],
       favoriteListsObj: {},
     };
@@ -64,7 +64,7 @@ class Hero extends React.Component {
   		axios.delete(`/listings/${this.state.listingId}/lists/${listId}`)
   		.then((response) => {
   			console.log(response);
-  			
+
   			this.getListsOfListing();
   		})
   		.catch((error) => {
