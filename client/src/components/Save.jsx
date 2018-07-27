@@ -14,44 +14,23 @@ class Save extends React.Component {
     	lists: [],
     	newListName: '',
     	listingId: 8,
-    	fovoriteListsObj: {},
+    	favoriteListsObj: {},
     };
   }
 
   componentDidMount() {
-  	this.getListsOfListing(); // on success get all lists
+  	this.setState({ lists: this.props.lists });
+  	this.setState({ favoriteListsObj: this.props.favoriteListsObj });
   }
 
-  getLists() {
-    axios.get(`/users/${this.state.userId}/list`)
-      .then((response) => {
-      	console.log('Lists data: ', response.data);
+  componentDidUpdate(prevProps) {
+  	if (this.props.lists !== prevProps.lists) { // IT IS EXTREMLY IMPORTANT TO CHECK THE CURRENT AND THE PREVIOUS PROPS. THIS IS REACT DOCUMENTATION. ELSE IT BREAK AND RENDERS TWICE!!
+  		this.setState({ lists: this.props.lists });
+  	}
 
-      	const tempLists = response.data;
-
-
-      	const objectOfFavLists = {};
-  	  	for (let i = 0; i < this.state.favoriteLists.length; i++) {
-  	  		objectOfFavLists[this.state.favoriteLists[i].list_id] = 'aaa';
-  	  	}
-
-  	  	this.setState({ fovoriteListsObj: objectOfFavLists }); // used in toggleFavorites function
-
-  	  	// now we are sure that the favoritelists are on the objectOfFavLists
-  	  	for (let i = 0; i < tempLists.length; i++) {
-  	  		const dd = tempLists[i].id;
-  	  		if (objectOfFavLists[tempLists[i].id]) {
-  	  			tempLists[i].icon = './pinkheart.png';
-  	  		} else {
-  	  			tempLists[i].icon = './savesymbol.png';
-  	  		}
-  	  	}
-
-      	this.setState({ lists: tempLists });
-      })
-      .catch((error) => {
-      	console.log('Axios error in getting lists ', error);
-      });
+  	if (this.props.favoriteListsObj !== prevProps.favoriteListsObj) {
+  		this.setState({ favoriteListsObj: this.props.favoriteListsObj });
+  	}
   }
 
 
@@ -71,7 +50,7 @@ class Save extends React.Component {
   	  })
   	.then((response) => {
   		console.log(response);
-  		this.getLists();
+  		this.props.onClick(3);
   		this.setState({ showCreateNewListMessage: true });
   	    this.setState({ showNewListInfo: false });
   	})
@@ -85,26 +64,31 @@ class Save extends React.Component {
   	this.setState({ showNewListInfo: true });
   }
 
-  getListsOfListing() {
-  	axios.get(`/listings/${this.state.listingId}/lists`)
-  	  .then((response) => {
-  	  	console.log('....', response.data);
-  	  	this.setState({ favoriteLists: response.data });
-
-  	  	this.getLists();
-  	  })
-  	  .catch((error) => {
-  	  	console.log('Axios error in getting data from listings_lists');
-  	  });
-  }
 
   toggleFavorite(e) {
   	const listId = e.target.name;
 
-  	if (this.state.fovoriteListsObj[listId]) {
-  		console.log('This is liked, must now remove');
+  	if (this.state.favoriteListsObj[listId]) {
+  		// This is liked, must now remove
+  		axios.delete(`/listings/${this.state.listingId}/lists/${listId}`)
+  		.then((response) => {
+  			console.log(response);
+  			// this.getListsOfListing();
+  			this.props.onClick(2);
+  		})
+  		.catch((error) => {
+  			console.log('Error in axios in delete favorite');
+  		});
   	} else {
-  		console.log('This is not liked, must now add');
+  		// This is not liked, must now add
+  		axios.post(`/listings/${this.state.listingId}/lists/${listId}`)
+  		.then((response) => {
+  			console.log(response);
+  			this.props.onClick(2);
+  		})
+  		.catch((error) => {
+  			console.log('Error in axios in adding new favorite');
+  		});
   	}
   }
 
@@ -166,7 +150,7 @@ Create
       <div styleName="save">
 
         <div styleName="xbutton-container">
-          <img styleName="xbutton" onClick={this.props.onClick} src="./blackx.png" />
+          <img styleName="xbutton" onClick={() => { this.props.onClick(1); }} src="./blackx.png" />
         </div>
 
         <div styleName="title-container">

@@ -15,6 +15,14 @@ class Hero extends React.Component {
       showSaveModal: false,
       heroUrl: '',
       photos: [],
+      saveStatus: false,
+      savebuttonSymbol: '',
+      saveButtonText: '',
+      userId: 8,
+      lists: [],
+      listingId: 8,
+      favoriteLists: [],
+      favoriteListsObj: {},
     };
 
     this.handleShowGallery = this.handleShowGallery.bind(this);
@@ -27,6 +35,7 @@ class Hero extends React.Component {
 
   componentDidMount() {
     this.getListingPhotos();
+    this.getListsOfListing();
   }
 
   handleShowGallery() {
@@ -64,6 +73,82 @@ class Hero extends React.Component {
       });
   }
 
+  toggleSaveButton() {
+  	console.log('Operate');
+  }
+
+  handleSaveOnclicks(identifier) { // helpful in case one wants to pass in multiple functions to one component
+  	if (identifier === 1) { // to close the modal
+  		this.handleHideSave();
+  	} else if (identifier === 2) {
+  		this.getListsOfListing();
+  	} else if (identifier === 3) {
+  		this.getLists();
+  	}
+  }
+
+  getListsOfListing() {
+  	axios.get(`/listings/${this.state.listingId}/lists`)
+  	  .then((response) => {
+  	  	console.log('....', response.data);
+  	  	this.setState({ favoriteLists: response.data });
+
+  	  	this.getLists();
+  	  })
+  	  .catch((error) => {
+  	  	console.log('Axios error in getting data from listings_lists');
+  	  });
+  }
+
+  getLists() {
+    axios.get(`/users/${this.state.userId}/list`)
+      .then((response) => {
+      	console.log('Lists data: ', response.data);
+
+      	const tempLists = response.data;
+      	let isAtLeastOneList = false;
+
+
+      	const objectOfFavLists = {};
+  	  	for (let i = 0; i < this.state.favoriteLists.length; i++) {
+  	  		objectOfFavLists[this.state.favoriteLists[i].list_id] = 'aaa';
+  	  		isAtLeastOneList = true;
+  	  	}
+
+  	  	if (isAtLeastOneList === true) {
+  	  		this.setState({ saveButtonText: 'Saved' }, () => {
+  	  			this.setState({ savebuttonSymbol: './pinkheart.png' }, () => {
+  	  				this.setState({ saveStatus: true });
+  	  			});
+  	  		});
+  	  	} else {
+  	  		this.setState({ saveButtonText: 'Save' }, () => {
+  	  			this.setState({ savebuttonSymbol: './savesymbol.png' }, () => {
+  	  				this.setState({ saveStatus: false });
+  	  			});
+  	  		});
+  	  	}
+
+  	  	this.setState({ favoriteListsObj: objectOfFavLists }); // used in toggleFavorites function
+
+  	  	// now we are sure that the favoritelists are on the objectOfFavLists
+  	  	for (let i = 0; i < tempLists.length; i++) {
+  	  		const dd = tempLists[i].id;
+  	  		if (objectOfFavLists[tempLists[i].id]) {
+  	  			tempLists[i].icon = './pinkheart.png';
+  	  		} else {
+  	  			tempLists[i].icon = './savesymbol.png';
+  	  		}
+  	  	}
+
+      	this.setState({ lists: tempLists });
+      })
+      .catch((error) => {
+      	console.log('Axios error in getting lists ', error);
+      });
+  }
+
+
   render() {
     const imgUrl = this.state.heroUrl;
     const divStyle = {
@@ -91,7 +176,7 @@ class Hero extends React.Component {
     	modal = (
       <Modal>
         <div styleName="modal-white">
-          <Save galleryPhotos={this.state.heroUrl} onClick={this.handleHideSave.bind(this)} />
+          <Save galleryPhotos={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} onClick={this.handleSaveOnclicks.bind(this)} />
         </div>
       </Modal>
       );
@@ -111,8 +196,8 @@ View Photos
               Share
           </button>
           <button styleName="hero-save-button" onClick={this.handleShowSave}>
-            <img styleName="hero-button-image" src="./savesymbol.png" />
-              Save
+            <img styleName="hero-button-image" src={this.state.savebuttonSymbol} />
+            {this.state.saveButtonText}
           </button>
         </div>
       </div>
