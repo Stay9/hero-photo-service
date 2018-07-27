@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 app.get('/listings/:listing_id/photos', (req, res) => {
   const listingId = req.params.listing_id;
   // query the database to get all data from the listing_photos table
-  Queries.query(listingId, (err, results) => {
+  Queries.getListingPhotos(listingId, (err, results) => {
     if (err) {
       console.log('Server side error in query to get data from the listings_data table', err);
     } else {
@@ -24,9 +24,21 @@ app.get('/listings/:listing_id/photos', (req, res) => {
       res.json(results);
     }
   });
-  console.log('Passed in listing_id is : ', req.params.listing_id);
   // res.send(200);
 });
+
+app.get('/users/:user_id/list', (req, res) => {
+  const userId = req.params.user_id;
+  // query the database to get all data from the lists table
+  Queries.getLists(userId, (err, results) => {
+    if (err) {
+      console.log('Server side error in query to get data from the lists table ', err);
+    } else {
+      console.log('Server side success in query to get data from the lists table ', res);
+      res.json(results);
+    }
+  })
+})
 
 app.listen(3000, (err) => {
   if (err) {

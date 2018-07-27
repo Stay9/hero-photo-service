@@ -24,14 +24,14 @@ const getLists = (userId, whenGotten) => {
       whenGotten(err);
     } else {
       console.log('Database side success in retrieving data from the lists table ', res);
-      whenGotten(res);
+      whenGotten(null, res);
     }
   });
 };
 
-getLists(4, (err, res) => {});
+//getLists(4, (err, res) => {});
 
 module.exports = {
-  query: getListingPhotos,
+  getListingPhotos: getListingPhotos,
   getLists: getLists,
 };
