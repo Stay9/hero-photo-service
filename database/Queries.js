@@ -43,10 +43,57 @@ const addList = (userId, listName, whenDone) => {
   });
 };
 
-//addList(4, 'Ya know it', (err, res) => {});
+// addList(4, 'Ya know it', (err, res) => {});
+const getListsOfListing = (listingId, whenGotten) => {
+  const theQuery = `SELECT * FROM listings_lists WHERE listing_id = ${listingId}`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in retrieving data from the listings_lists table ', err);
+      whenGotten(err);
+    } else {
+      console.log('Databas side success in retrieving data from the listings_lists table ', res);
+      whenGotten(null, res);
+    }
+  });
+};
+
+// getListsOfListing(90, (err, res) => {});
+
+const addToFavorite = (listingId, listId, whenDone) => {
+  const theQuery = `INSERT INTO listings_lists (listing_id, list_id) VALUES (${listingId}, ${listId})`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in adding data to the listings_lists table ', err);
+      whenDone(err);
+    } else {
+      console.log('Database side success in adding data to the listings_lists table ', res);
+      whenDone(null, res);
+    }
+  });
+};
+
+// addToFavorite(100,100, ()=> {});
+
+const removeFromFavorite = (listingId, listId, whenDone) => {
+  const theQuery = `DELETE FROM listings_lists WHERE listing_id = ${listingId} AND list_id = ${listId}`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in deleting data from the listings_lists table ', err);
+      whenDone(err);
+    } else {
+      console.log('Database side success in deleting data from the listings_lists table ', res);
+      whenDone(null, res);
+    }
+  });
+};
+
+// removeFromFavorite(100, 100, () => {});
 
 module.exports = {
   getListingPhotos,
   getLists,
   addList,
+  getListsOfListing,
+  addToFavorite,
+  removeFromFavorite,
 };
