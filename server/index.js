@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser')
 const Queries = require('../database/Queries.js');
 
 const app = express();
@@ -12,6 +13,8 @@ app.use((req, res, next) => {
 
 // access the static files
 app.use(express.static(path.join(__dirname, '../client/dist')));
+
+app.use(bodyParser.json());
 
 app.get('/listings/:listing_id/photos', (req, res) => {
   const listingId = req.params.listing_id;
@@ -37,8 +40,22 @@ app.get('/users/:user_id/list', (req, res) => {
       console.log('Server side success in query to get data from the lists table ', res);
       res.json(results);
     }
-  })
-})
+  });
+});
+
+app.post('/users/:user_id/addList', (req, res) => {
+  const userId = req.params.user_id;
+  const listName = req.body.list_name;
+  // querty the database to insert the new list into the lists table
+  Queries.addList(userId, listName, (err, results) => {
+    if (err) {
+      console.log('Server side error in query to add list to the lists table ', err);
+    } else {
+      console.log('Server side success in query to add list to the lists table ', res);
+      res.sendStatus(201);
+    }
+  });
+});
 
 app.listen(3000, (err) => {
   if (err) {

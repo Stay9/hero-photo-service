@@ -56,10 +56,8 @@ class Hero extends React.Component {
   getListingPhotos() {
     axios.get('/listings/90/photos')
       .then((response) => {
-        console.log('Listings photos data: ', response.data);
         this.setState({ heroUrl: response.data[0].photo_url });
         this.setState({ photos: response.data });
-        console.log('photos from state side: ', this.state.photos);
       })
       .catch((error) => {
         console.log('Axios error in getting listing photos ', error);

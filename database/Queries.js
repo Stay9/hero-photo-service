@@ -29,9 +29,24 @@ const getLists = (userId, whenGotten) => {
   });
 };
 
-//getLists(4, (err, res) => {});
+// getLists(4, (err, res) => {});
+const addList = (userId, listName, whenDone) => {
+  const theQuery = `INSERT INTO lists (list_name, list_user_id) VALUES ('${listName}', ${userId})`;
+  connection.query(theQuery, (err, res) => {
+    if (err) {
+      console.log('Database side error in inserting into the lists table');
+      whenDone(err);
+    } else {
+      console.log('Database side success in inserting into the lists table');
+      whenDone(null, res);
+    }
+  });
+};
+
+//addList(4, 'Ya know it', (err, res) => {});
 
 module.exports = {
-  getListingPhotos: getListingPhotos,
-  getLists: getLists,
+  getListingPhotos,
+  getLists,
+  addList,
 };

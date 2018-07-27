@@ -1,5 +1,6 @@
 import React from 'react';
 import CSSModules from 'react-css-modules';
+import axios from 'axios';
 import styles from './save.css';
 
 class Save extends React.Component {
@@ -9,7 +10,24 @@ class Save extends React.Component {
     this.state = {
     	showCreateNewListMessage: true,
     	showNewListInfo: false,
+    	userId: 7,
+    	lists: [],
     };
+  }
+
+  componentDidMount() {
+  	this.getLists();
+  }
+
+  getLists() {
+    axios.get(`/users/${this.state.userId}/list`)
+      .then((response) => {
+      	console.log('Lists data: ', response.data);
+      	this.setState({ lists: response.data });
+      })
+      .catch((error) => {
+      	console.log('Axios error in getting lists ', error);
+      });
   }
 
   cancel() {
@@ -24,7 +42,7 @@ class Save extends React.Component {
   showOptionsForNewList() {
   	this.setState({ showCreateNewListMessage: false });
   	this.setState({ showNewListInfo: true });
-  };
+  }
 
   render() {
     let theNewListMessage = null;
@@ -102,32 +120,17 @@ Save to list
 
         <div styleName="list-container">
           <div styleName="list">
-            <div styleName="list-item">
-              <p>
-                {' '}
-List item 1
-                {' '}
-              </p>
-              <img styleName="list-save-button" src="./pinkheart.png" />
-            </div>
 
-            <div styleName="list-item">
-              <p>
-                {' '}
-List item 1
-                {' '}
-              </p>
-              <img styleName="list-save-button" src="./savesymbol.png" />
-            </div>
-
-            <div styleName="list-item">
-              <p>
-                {' '}
-List item 1
-                {' '}
-              </p>
-              <img styleName="list-save-button" src="./savesymbol.png" />
-            </div>
+            {
+            	this.state.lists.map(list => (
+              <div styleName="list-item">
+                <p>
+                  {list.list_name}
+                </p>
+                <img styleName="list-save-button" src="./pinkheart.png" />
+              </div>
+            	))
+            }
 
           </div>
 
