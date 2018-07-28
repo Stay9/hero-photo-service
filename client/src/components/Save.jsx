@@ -24,9 +24,10 @@ class Save extends React.Component {
   	this.setState({ lists: this.props.lists });
   	this.setState({ favoriteListsObj: this.props.favoriteListsObj });
   	this.setState({ userId: this.props.userId });
-  	this.setState({ listingId: this.props.listingId }, () => {
-  		this.getListingDetails();
-  	});
+  	this.setState({ listingId: this.props.listingId });
+    this.setState({ details: this.props.details }, () => {
+      this.setReviewArray();
+    });
   }
 
   componentDidUpdate(prevProps) {
@@ -45,6 +46,10 @@ class Save extends React.Component {
   	if (this.props.listingId !== prevProps.listingId) {
   		this.setState({ listingId: this.props.listingId });
   	}
+
+    if (this.props.details !== prevProps.details) {
+      this.setState({ details: this.props.details });
+    }
   }
 
 
@@ -106,7 +111,7 @@ class Save extends React.Component {
   	}
   }
 
-  getListingDetails() {
+  /*getListingDetails() {
   	axios.get(`/listings/${this.state.listingId}/details`)
   	 .then((response) => {
         this.setState({ details: response.data[0] }, () => {
@@ -117,7 +122,7 @@ class Save extends React.Component {
       .catch((error) => {
         console.log('Axios error in getting listing photos ', error);
       });
-  }
+  }*/
 
   setReviewArray() {
   	const outputArr = [];

@@ -4,6 +4,7 @@ import axios from 'axios';
 import Modal from './Modal.jsx';
 import Gallery from './Gallery.jsx';
 import Save from './Save.jsx';
+import Share from './Share.jsx';
 import styles from './hero.css';
 
 class Hero extends React.Component {
@@ -24,6 +25,7 @@ class Hero extends React.Component {
       listingId: 15,
       favoriteLists: [],
       favoriteListsObj: {},
+      details: {},
     };
 
     this.handleShowGallery = this.handleShowGallery.bind(this);
@@ -37,6 +39,7 @@ class Hero extends React.Component {
   componentDidMount() {
     this.getListingPhotos();
     this.getListsOfListing();
+    this.getListingDetails();
   }
 
   handleShowGallery() {
@@ -164,6 +167,19 @@ class Hero extends React.Component {
       });
   }
 
+  getListingDetails() {
+    axios.get(`/listings/${this.state.listingId}/details`)
+     .then((response) => {
+        this.setState({ details: response.data[0] }, () => {
+          //this.setReviewArray();
+          console.log('the details', this.state.details);
+        });
+      })
+      .catch((error) => {
+        console.log('Axios error in getting listing photos ', error);
+      });
+  }
+
 
   render() {
     const imgUrl = this.state.heroUrl;
@@ -183,8 +199,8 @@ class Hero extends React.Component {
     } else if (this.state.showShareModal === true) {
     	modal = (
       <Modal>
-        <div styleName="modal-dark-black">
-          <Gallery galleryPhotos={this.state.photos} onClick={this.handleHideShare.bind(this)} />
+        <div styleName="modal-light-black">
+          <Share details={this.state.details} onClick={this.handleHideShare.bind(this)}/>
         </div>
       </Modal>
       );
@@ -192,7 +208,7 @@ class Hero extends React.Component {
     	modal = (
       <Modal>
         <div styleName="modal-white">
-          <Save heroUrl={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} userId={this.state.userId} listingId={this.state.listingId} onClick={this.handleSaveOnclicks.bind(this)} />
+          <Save heroUrl={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} userId={this.state.userId} listingId={this.state.listingId} details={this.state.details} onClick={this.handleSaveOnclicks.bind(this)} />
         </div>
       </Modal>
       );
@@ -207,7 +223,7 @@ View Photos
         </button>
         {modal}
         <div styleName="hero-top-right-buttons">
-          <button styleName="hero-share-button">
+          <button styleName="hero-share-button" onClick={this.handleShowShare}>
             <img styleName="hero-button-image" src="./sharesymbol.png" />
               Share
           </button>

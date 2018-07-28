@@ -325,6 +325,104 @@
 
 
 
+.-share-share-container-qXGWLJ- {
+	display: flex;
+	justify-content: center;
+}
+
+.-share-share-rk74ej- {
+	border: 0.1px solid rgba(0.7,0.7,0.7, .1);
+	background-color: white;
+	width: 400px;
+	height: 670px;
+	display: flex;
+	flex-direction: column;
+
+}
+
+.-share-xbutton-container-1D6pL8- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-share-xbutton-CIXOC4- {
+	margin-top: 20px;
+	margin-left: 20px;
+	height: 20px;
+	width: 20px;
+}
+
+.-share-title-container-37sajr- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-share-title-2irq6L- {
+	margin-top: 22px;
+	font-size : 26px;
+	margin-left: 20px;
+	font-weight: bold;
+	color:#484848;
+}
+
+.-share-titlePhrase-20um4d- {
+	margin-top: 10px;
+	margin-left: 20px;
+	color:#484848;
+}
+
+.-share-list-container-2lR3cB- {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.-share-list-2zldIy- {
+    width: 100%;
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top: 22px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.-share-list-item-G1PYZg- {
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
+	height: 80px;
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-share-list-item-last-UnLyDf- {
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
+	border-bottom: .4px solid rgba(0.7,0.7,0.7, .6);
+	height: 80px;
+	display: flex;
+	justify-content: flex-start;
+
+}
+
+.-share-list-item-photo-3xNfXq- {
+	margin-right: 7px;
+	margin-top: 27px;
+	width: auto;
+	height: 18px;
+}
+
+.-share-list-item-email-photo-3vH40R- {
+	margin-right: 7px;
+	margin-top: 27px;
+	width: 17px;
+	height: 15px;
+}
+
+.-share-list-item-text-WZjFrz- {
+	margin-top: 27px;
+	font-size: 18px;
+	color:#007D8C;
+}
 .-hero-hero-1OvWjm- {
     height: 500px;
 	display: flex;
@@ -383,6 +481,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.-hero-modal-light-black-2RCrVL- {
+  background-color: rgb(32,32,32, .8);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
 }
 
 .-hero-modal-white-2GKpji- {
