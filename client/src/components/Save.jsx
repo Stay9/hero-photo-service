@@ -9,6 +9,7 @@ class Save extends React.Component {
 
     this.state = {
       showTopPart: true,
+      showBottomPart: false,
     	showCreateNewListMessage: true,
     	showNewListInfo: false,
     	userId: 0,
@@ -19,6 +20,8 @@ class Save extends React.Component {
     	ratings: [0, 0, 0, 0],
     	details: {},
     };
+
+    this.handleShowTopPart = this.handleShowTopPart.bind(this);
   }
 
   componentDidMount() {
@@ -128,12 +131,30 @@ class Save extends React.Component {
 
   handleHideTopPart() {
     this.setState({ showTopPart: false });
+    this.handleShowBottomPart();
   }
+
+  handleShowTopPart() {
+    this.setState({ showTopPart: true });
+    this.handleHideBottomPart();
+  }
+
+  handleHideBottomPart() {
+    this.setState({ showBottomPart: false });
+  }
+
+  handleShowBottomPart() {
+    this.setState({ showBottomPart: true });
+  }
+
+
 
   render() {
     let theNewListMessage = null;
     let theNewListInfo = null;
     let topPart = null;
+    let bottomPart = null;
+    let dropSymbol = null;
 
     if (this.state.showCreateNewListMessage === true) {
     	theNewListMessage = (
@@ -186,7 +207,7 @@ Create
 
     if (this.state.showTopPart === true) {
       topPart = (
-        <div>
+        <div styleName="top-part-container">
           <div styleName="xbutton-container">
             <img styleName="xbutton" onClick={() => { this.props.onClick(1); }} src="./blackx.png" />
           </div>
@@ -225,14 +246,53 @@ Save to list
 
           </div>
 
-          <div styleName="footer-separator" />
-
         </div>
       );
     } else {
       topPart = null;
+       dropSymbol = <div onClick={this.handleShowTopPart.bind(this)}>
+            <img styleName="footer-drop-symbol" src="./drop.png"/>
+          </div>
     }
 
+    if (this.state.showBottomPart === true) {
+      bottomPart = 
+      <div styleName="bottom-part-container">
+        <div styleName="bottom-part">
+          <div styleName="bottom-description-container">
+            <div styleName="bottom-description-title">
+             About the listing
+            </div>
+
+            <div styleName="bottom-description-text">
+            Here the text
+            </div>
+          </div>
+
+          <div styleName="bottom-description-container">
+            <div styleName="bottom-description-title">
+             The Space
+            </div>
+
+            <div styleName="bottom-description-text">
+            Neighborhood
+            </div>
+          </div>
+
+          <div styleName="bottom-description-container">
+            <div styleName="bottom-description-title">
+             Reviews
+            </div>
+
+            <div styleName="bottom-description-text">
+            Here the text
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    }
 
   	return (
     <div styleName="save-container">
@@ -240,10 +300,12 @@ Save to list
 
         {topPart}
 
-        <div styleName="footer-container" onClick={this.handleHideTopPart.bind(this)}>
-          <div styleName="footer">
+        <div styleName="footer-container" >
+          {dropSymbol}
+
+          <div styleName="footer" onClick={this.handleHideTopPart.bind(this)}>
             <div>
-              <img styleName="footer-hero-pic" src={this.props.heroUrl} />
+              <img styleName="footer-hero-pic" src={this.props.heroUrl}/>
             </div>
 
             <div styleName="footer-text-and-review-container">
@@ -290,6 +352,8 @@ Reviews
 
           </div>
         </div>
+
+        {bottomPart}
 
       </div>
     </div>

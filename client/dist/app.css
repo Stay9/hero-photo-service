@@ -112,6 +112,15 @@
 	height: 670px;
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
+	overflow: auto; /* to enable scrolling */
+
+}
+
+.-save-top-part-container-1g6N8-- {
+	display: flex;
+	justify-content: flex-start;
+	flex-direction: column;
 }
 
 .-save-xbutton-container-1Kz-Vj- {
@@ -144,14 +153,16 @@
 	width: 100%;
 	display:flex;
 	justify-content: center;
+	overflow: auto; /* to enable scrolling */
 }
 
 .-save-list-1VXbms- {
 	width: 100%;
+	height: 400px;
 	display: flex;
 	flex-direction: column;
-	overflow: auto; /* to enable scrolling */
 	margin-bottom: 100px;
+
 }
 
 .-save-list-item-2KDFhv- {
@@ -249,25 +260,39 @@
 
 }
 
-.-save-footer-separator-kmy7-P- {
-	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
-}
 
 .-save-footer-container-3JQJ0_- {
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
 	width: 100%;
 	margin-bottom: 10px;
 	display: flex;
-	justify-content: flex-start;
-	height: 120px;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 150px;
+
 
 }
 
+.-save-footer-drop-container-2ROxSe- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-save-footer-drop-symbol-1BPv_0- {
+	width: 13px;
+	height: auto;
+	margin-left: 50px;
+	margin-top: 30px;
+}
+
 .-save-footer-3j47Ln- {
+	margin-top: 15px;
 	display: flex;
 	justify-content: flex-start;
 	height: 80px;
-	margin-top: 20px;
 	margin-left: 50px;
+	margin-bottom: 10px;
+
 }
 
 .-save-footer-hero-pic-3I1RzW- {
@@ -326,6 +351,42 @@
 	font-weight: bold;
 }
 
+.-save-bottom-part-container-2kjCw5- {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.-save-bottom-part-1UaVUC- {
+	width: 100%;
+	height: 500px; /* must specify height in order for scrolling with the .save to work */
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	justify-content: flex-start;
+
+}
+
+.-save-bottom-description-container-yDYVcV- {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
+}
+
+.-save-bottom-description-title-1vVO4i- {
+	font-weight: bold;
+	color:#484848;
+	font-size: 17px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-left: 50px;
+}
+
+.-save-bottom-description-text-UEp0mw- {
+	margin-left: 50px;
+	margin-bottom: 15px;
+	color:#484848;
+}
 
 
 .-share-share-container-qXGWLJ- {
