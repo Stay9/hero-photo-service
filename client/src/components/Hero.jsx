@@ -169,9 +169,9 @@ class Hero extends React.Component {
 
   getListingDetails() {
     axios.get(`/listings/${this.state.listingId}/details`)
-     .then((response) => {
+      .then((response) => {
         this.setState({ details: response.data[0] }, () => {
-          //this.setReviewArray();
+          // this.setReviewArray();
           console.log('the details', this.state.details);
         });
       })
@@ -200,7 +200,7 @@ class Hero extends React.Component {
     	modal = (
       <Modal>
         <div styleName="modal-light-black">
-          <Share details={this.state.details} onClick={this.handleHideShare.bind(this)}/>
+          <Share details={this.state.details} onClick={this.handleHideShare.bind(this)} />
         </div>
       </Modal>
       );

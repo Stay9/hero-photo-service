@@ -49,6 +49,7 @@
 	display: flex;
 	flex-direction: column;
 	overflow: auto; /* to enable scrolling */
+	margin-bottom: 100px;
 }
 
 .list-item {
@@ -146,13 +147,15 @@
 
 }
 
+.footer-separator {
+	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
+}
+
 .footer-container {
 	width: 100%;
-	margin-top:140px;
 	margin-bottom: 10px;
 	display: flex;
 	justify-content: flex-start;
-	border-top: .4px solid rgba(0.7,0.7,0.7, .6);
 	height: 120px;
 
 }

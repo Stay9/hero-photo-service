@@ -8,6 +8,7 @@ class Save extends React.Component {
     super(props);
 
     this.state = {
+      showTopPart: true,
     	showCreateNewListMessage: true,
     	showNewListInfo: false,
     	userId: 0,
@@ -111,19 +112,6 @@ class Save extends React.Component {
   	}
   }
 
-  /*getListingDetails() {
-  	axios.get(`/listings/${this.state.listingId}/details`)
-  	 .then((response) => {
-        this.setState({ details: response.data[0] }, () => {
-        	this.setReviewArray();
-        	console.log('the details', this.state.details);
-        });
-      })
-      .catch((error) => {
-        console.log('Axios error in getting listing photos ', error);
-      });
-  }*/
-
   setReviewArray() {
   	const outputArr = [];
   	let paws = this.state.details.listing_review_average;
@@ -138,10 +126,14 @@ class Save extends React.Component {
   	this.setState({ ratings: outputArr });
   }
 
+  handleHideTopPart() {
+    this.setState({ showTopPart: false });
+  }
+
   render() {
     let theNewListMessage = null;
     let theNewListInfo = null;
-
+    let topPart = null;
 
     if (this.state.showCreateNewListMessage === true) {
     	theNewListMessage = (
@@ -192,33 +184,32 @@ Create
     }
 
 
-  	return (
-    <div styleName="save-container">
-      <div styleName="save">
+    if (this.state.showTopPart === true) {
+      topPart = (
+        <div>
+          <div styleName="xbutton-container">
+            <img styleName="xbutton" onClick={() => { this.props.onClick(1); }} src="./blackx.png" />
+          </div>
 
-        <div styleName="xbutton-container">
-          <img styleName="xbutton" onClick={() => { this.props.onClick(1); }} src="./blackx.png" />
-        </div>
-
-        <div styleName="title-container">
-          <h1 styleName="title">
-            {' '}
+          <div styleName="title-container">
+            <h1 styleName="title">
+              {' '}
 Save to list
-            {' '}
-          </h1>
-        </div>
+              {' '}
+            </h1>
+          </div>
 
 
-        {theNewListMessage}
+          {theNewListMessage}
 
-        {theNewListInfo}
+          {theNewListInfo}
 
 
-        <div styleName="list-container">
+          <div styleName="list-container">
 
-          <div styleName="list">
+            <div styleName="list">
 
-            {
+              {
             this.state.lists.map(list => (
               <div styleName="list-item">
                 <p>
@@ -227,15 +218,29 @@ Save to list
 
                 <img styleName="list-save-button" name={list.id} src={list.icon} onClick={this.toggleFavorite.bind(this)} />
               </div>
-            	))
+            ))
             }
+
+            </div>
 
           </div>
 
+          <div styleName="footer-separator" />
+
         </div>
+      );
+    } else {
+      topPart = null;
+    }
 
 
-        <div styleName="footer-container">
+  	return (
+    <div styleName="save-container">
+      <div styleName="save">
+
+        {topPart}
+
+        <div styleName="footer-container" onClick={this.handleHideTopPart.bind(this)}>
           <div styleName="footer">
             <div>
               <img styleName="footer-hero-pic" src={this.props.heroUrl} />
