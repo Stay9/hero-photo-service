@@ -275,13 +275,13 @@ Save to list
             </div>
 
             <div styleName="bottom-description-text">
-            Neighborhood
+            Here the text
             </div>
           </div>
 
           <div styleName="bottom-description-container">
             <div styleName="bottom-description-title">
-             Reviews
+             Neighborhood
             </div>
 
             <div styleName="bottom-description-text">

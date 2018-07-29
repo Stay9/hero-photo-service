@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const Queries = require('../database/Queries.js');
-
 const app = express();
+
 
 // making a middleware to tarck all incoming requests
 app.use((req, res, next) => {
@@ -117,10 +117,4 @@ app.get('/listings/:listing_id/details', (req, res) => {
   });
 });
 
-app.listen(3000, (err) => {
-  if (err) {
-    console.log('Error connecting to the port :', err);
-  } else {
-    console.log('Hero Photo server is listening on port 3000');
-  }
-});
+module.exports = app;
