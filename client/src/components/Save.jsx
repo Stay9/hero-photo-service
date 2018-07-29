@@ -289,8 +289,6 @@ Save to list
               {this.state.details.listing_neighborhood_description}
               </div>
             </div>
-
-
           </div>
         </div>
       );
