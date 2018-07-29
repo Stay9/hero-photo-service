@@ -208,7 +208,7 @@ class Hero extends React.Component {
     	modal = (
       <Modal>
         <div styleName="modal-white">
-          <Save heroUrl={this.state.heroUrl} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} userId={this.state.userId} listingId={this.state.listingId} details={this.state.details} onClick={this.handleSaveOnclicks.bind(this)} />
+          <Save heroUrl={this.state.heroUrl} heroDescription={this.state.photos[0].photo_description} lists={this.state.lists} favoriteListsObj={this.state.favoriteListsObj} userId={this.state.userId} listingId={this.state.listingId} details={this.state.details} onClick={this.handleSaveOnclicks.bind(this)} />
         </div>
       </Modal>
       );

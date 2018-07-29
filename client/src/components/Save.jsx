@@ -148,7 +148,6 @@ class Save extends React.Component {
   }
 
 
-
   render() {
     let theNewListMessage = null;
     let theNewListInfo = null;
@@ -250,48 +249,51 @@ Save to list
       );
     } else {
       topPart = null;
-       dropSymbol = <div onClick={this.handleShowTopPart.bind(this)}>
-            <img styleName="footer-drop-symbol" src="./drop.png"/>
-          </div>
+      dropSymbol = (
+        <div onClick={this.handleShowTopPart.bind(this)}>
+          <img styleName="footer-drop-symbol" src="./drop.png" />
+        </div>
+      );
     }
 
     if (this.state.showBottomPart === true) {
-      bottomPart = 
-      <div styleName="bottom-part-container">
-        <div styleName="bottom-part">
-          <div styleName="bottom-description-container">
-            <div styleName="bottom-description-title">
+      bottomPart = (
+        <div styleName="bottom-part-container">
+          <div styleName="bottom-part">
+            <div styleName="bottom-description-container">
+              <div styleName="bottom-description-title">
              About the listing
+              </div>
+
+              <div styleName="bottom-description-text">
+                {this.state.details.listing_description}
+              </div>
             </div>
 
-            <div styleName="bottom-description-text">
-            Here the text
-            </div>
-          </div>
-
-          <div styleName="bottom-description-container">
-            <div styleName="bottom-description-title">
+            <div styleName="bottom-description-container">
+              <div styleName="bottom-description-title">
              The Space
+              </div>
+
+              <div styleName="bottom-description-text">
+              {this.state.details.listing_space_description}
+              </div>
             </div>
 
-            <div styleName="bottom-description-text">
-            Here the text
-            </div>
-          </div>
-
-          <div styleName="bottom-description-container">
-            <div styleName="bottom-description-title">
+            <div styleName="bottom-description-container">
+              <div styleName="bottom-description-title">
              Neighborhood
+              </div>
+
+              <div styleName="bottom-description-text">
+              {this.state.details.listing_neighborhood_description}
+              </div>
             </div>
 
-            <div styleName="bottom-description-text">
-            Here the text
-            </div>
+
           </div>
-
-
         </div>
-      </div>
+      );
     }
 
   	return (
@@ -300,12 +302,12 @@ Save to list
 
         {topPart}
 
-        <div styleName="footer-container" >
+        <div styleName="footer-container">
           {dropSymbol}
 
           <div styleName="footer" onClick={this.handleHideTopPart.bind(this)}>
             <div>
-              <img styleName="footer-hero-pic" src={this.props.heroUrl}/>
+              <img styleName="footer-hero-pic" src={this.props.heroUrl} />
             </div>
 
             <div styleName="footer-text-and-review-container">
@@ -313,7 +315,7 @@ Save to list
               <div styleName="footer-description-container">
                 <div styleName="footer-description">
                   {' '}
-                  {this.state.details.listing_description}
+                  {this.props.heroDescription}
                   {' '}
                 </div>
               </div>

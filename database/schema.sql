@@ -31,6 +31,8 @@ CREATE TABLE listings (
   listing_address TEXT, 
   listing_host_photo_url VARCHAR(255),
   listing_description TEXT,
+  listing_space_description TEXT, 
+  listing_neighborhood_description TEXT,
   PRIMARY KEY(id)
 
 );
