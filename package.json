@@ -27,6 +27,7 @@
     "react": "^16.4.1",
     "react-css-modules": "^4.7.4",
     "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.1",
     "superagent": "^3.8.3",
     "supertest": "^3.1.0"
   },
@@ -35,6 +36,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
@@ -49,5 +52,10 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "/Users/jvertil/Desktop/hero-photo-service/hero-photo-service/tests/setup.js"
+    ]
   }
 }
