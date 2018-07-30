@@ -25,7 +25,7 @@ describe('Hero tests', () => {
  	expect(showGalleryState).toEqual(true);
  });
 
- test('Should open the Sahre Model when the share button is clicked', () => {
+ test('Should open the Share Model when the share button is clicked', () => {
  	const wrapper = shallow(<Hero/>);
  	const shareButton = wrapper.find('.hero-share-button');
  	shareButton.simulate('click');
@@ -34,25 +34,39 @@ describe('Hero tests', () => {
  });
 
  test('Should open the Save Model when the save button is clicked', () => {
- 	const wrapper = shallow(<Hero/>);
+ 	const wrapper = mount(<Hero/>);
+ 	wrapper.setState({ 
+ 		//heroUrl: 'dddd',
+ 		photos: [{photo_description: 'ddafd'}],
+ 		showSaveModal: true,
+
+    });
  	const saveButton = wrapper.find('.hero-save-button');
  	saveButton.simulate('click');
-	const showSaveState = wrapper.state().showSaveModal;
- 	expect(showSaveState).toEqual(true);
+
+ 	sinon.spy(Hero.prototype, 'handleShowSave');
+ 	
+ 	expect(Hero.prototype.handleShowSave.calledOnce).toEqual(true);
  });
 
-/* test('Should invoke handShowGallery', () => {
- 	const onButtonClick = sinon.spy();
+ test('Should invoke handleShowGallery', () => {
+ 	const spy = sinon.spy(Hero.prototype, 'handleShowGallery');
  	const wrapper = shallow(<Hero/>);
  	wrapper.find('.hero-view-photos-button').simulate('click');
- 	expect(onButtonClick.calledOnce).to.equal(true);
- })*/
+ 	expect(spy.calledOnce).toEqual(true);
+ });
 
- test('Should call didMount', () => {
- 	const didMount = sinon.spy();
- 	
+
+
+ test('Should check status after componentDidMount', () => {
+ 	sinon.spy(Hero.prototype, 'componentDidMount');
+ 	sinon.spy(Hero.prototype, 'getListingPhotos');
+ 	sinon.spy(Hero.prototype, 'getListingDetails');
+    const container = mount(<Hero />);
+    expect(Hero.prototype.componentDidMount.calledOnce).toEqual(true);
+    expect(Hero.prototype.getListingPhotos.calledOnce).toEqual(true); 
+    expect(Hero.prototype.getListingDetails.calledOnce).toEqual(true);
  })
-
 
 });
 
