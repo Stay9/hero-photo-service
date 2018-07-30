@@ -19,6 +19,7 @@
     "babel-preset-es2015": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "identity-obj-proxy": "^3.0.0",
     "install": "^0.12.1",
     "mysql": "^2.15.0",
     "nodemon": "^1.18.3",
@@ -27,6 +28,8 @@
     "react": "^16.4.1",
     "react-css-modules": "^4.7.4",
     "react-dom": "^16.4.1",
+    "react-test-renderer": "^16.4.1",
+    "sinon": "^6.1.4",
     "superagent": "^3.8.3",
     "supertest": "^3.1.0"
   },
@@ -35,6 +38,8 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^1.0.0",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
@@ -49,5 +54,14 @@
     "style-loader": "^0.21.0",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "/Users/jvertil/Desktop/hero-photo-service/hero-photo-service/tests/setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
   }
 }
