@@ -238,3 +238,4 @@ View Photos
 }
 
 export default CSSModules(Hero, styles);
+module.exports.Hero = Hero;
