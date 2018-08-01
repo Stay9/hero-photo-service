@@ -15,7 +15,7 @@ class Gallery extends React.Component {
       carrEndIndex: 8,
       displayCarr: true,
       detailedMessage: 'Hide photo list',
-      triangleSymbol: './downtriangle.png',
+      triangleSymbol: 'https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/downtringle.png',
     };
     this.updateCarrousel = this.updateCarrousel.bind(this);
   }
@@ -144,13 +144,13 @@ class Gallery extends React.Component {
     return (
       <div styleName="gallery">
         <div styleName="xbutton-container">
-          <img onClick={this.props.onClick} src="./xsymbol.png" styleName="xbutton" />
+          <img onClick={this.props.onClick} src="https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/xsymbol.png" styleName="xbutton" />
         </div>
 
         <div styleName="prevnext-container">
-          <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="./prevsymbol.png" />
+          <img onClick={this.showPrevPhoto.bind(this)} styleName="prevnext-image" src="https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/prevsymbol.png" />
           <img onClick={this.showNextPhoto.bind(this)} styleName="main-image" src={this.state.mainPhoto} />
-          <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="./nextsymbol.png" />
+          <img onClick={this.showNextPhoto.bind(this)} styleName="prevnext-image" src="https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/nextsymbol.png" />
         </div>
 
         <div onMouseEnter={this.showCarrousel.bind(this)} styleName="details-container">

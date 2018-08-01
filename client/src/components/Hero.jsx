@@ -136,13 +136,13 @@ class Hero extends React.Component {
 
   	  	if (isAtLeastOneList === true) {
   	  		this.setState({ saveButtonText: 'Saved' }, () => {
-  	  			this.setState({ savebuttonSymbol: './pinkheart.png' }, () => {
+  	  			this.setState({ savebuttonSymbol: 'https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/pinkheart.png' }, () => {
   	  				this.setState({ saveStatus: true });
   	  			});
   	  		});
   	  	} else {
   	  		this.setState({ saveButtonText: 'Save' }, () => {
-  	  			this.setState({ savebuttonSymbol: './savesymbol.png' }, () => {
+  	  			this.setState({ savebuttonSymbol: 'https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/savesymbol.png' }, () => {
   	  				this.setState({ saveStatus: false });
   	  			});
   	  		});
@@ -154,9 +154,9 @@ class Hero extends React.Component {
   	  	for (let i = 0; i < tempLists.length; i++) {
   	  		const dd = tempLists[i].id;
   	  		if (objectOfFavLists[tempLists[i].id]) {
-  	  			tempLists[i].icon = './pinkheart.png';
+  	  			tempLists[i].icon = 'https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/pinkheart.png';
   	  		} else {
-  	  			tempLists[i].icon = './savesymbol.png';
+  	  			tempLists[i].icon = 'https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/savesymbol.png';
   	  		}
   	  	}
 
@@ -224,7 +224,7 @@ View Photos
         {modal}
         <div styleName="hero-top-right-buttons">
           <button styleName="hero-share-button" onClick={this.handleShowShare}>
-            <img styleName="hero-button-image" src="./sharesymbol.png" />
+            <img styleName="hero-button-image" src="https://s3-us-west-1.amazonaws.com/hackreactor-fec-hero/static-assets/sharesymbol.png" />
               Share
           </button>
           <button styleName="hero-save-button" onClick={this.handleShowSave}>
