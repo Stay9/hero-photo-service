@@ -12,29 +12,32 @@ class Gallery extends React.Component {
       mainPhoto: this.props.galleryPhotos[0].photo_url,
       mainPhotoIndex: 0,
       carrBeginIndex: 0,
-      carrEndIndex: 10,
+      carrEndIndex: 8,
       displayCarr: true,
       detailedMessage: 'Hide photo list',
       triangleSymbol: './downtriangle.png',
     };
+    this.updateCarrousel = this.updateCarrousel.bind(this);
   }
 
   componentDidMount() {
     console.log('da fotos! ', this.state.photos);
   }
 
+
   updateCarrousel() {
     if (this.state.mainPhotoIndex <= 4) {
       this.setState({ carrBeginIndex: 0 });
-      this.setState({ carrEndIndex: 10 });
+      this.setState({ carrEndIndex: 8 });
     } else if (this.state.mainPhotoIndex > 4 && this.state.mainPhotoIndex < 10 && this.state.mainPhotoIndex < this.state.photos.length) {
-      this.setState({ carrBeginIndex: this.state.mainPhotoIndex - 5 });
-      this.setState({ carrEndIndex: this.state.mainPhotoIndex + 5 });
+      this.setState({ carrBeginIndex: this.state.mainPhotoIndex - 4 });
+      this.setState({ carrEndIndex: this.state.mainPhotoIndex + 4 });
     } else {
-      this.setState({ carrBeginIndex: this.state.photos.length - 11 });
+      this.setState({ carrBeginIndex: this.state.photos.length - 9 });
       this.setState({ carrEndIndex: this.state.photos.length - 1 });
     }
-    console.log('begin: ', this.state.mainPhotoIndex);
+    console.log('main: ', this.state.mainPhotoIndex);
+    console.log('begin: ', this.state.carrBeginIndex);
     console.log('end: ', this.state.carrEndIndex);
   }
 
@@ -67,8 +70,12 @@ class Gallery extends React.Component {
   }
 
   showClickedPhoto(newMainPhoUrl, newMainPhotoIndex) {
-    this.setState({ mainPhoto: newMainPhoUrl });
-    this.setState({ mainPhotoIndex: newMainPhotoIndex });
+    this.setState({ mainPhoto: newMainPhoUrl }, () => {
+      this.setState({ mainPhotoIndex: newMainPhotoIndex }, () => {
+        this.updateCarrousel();
+      });
+    });
+    
     console.log('clicked ', newMainPhoUrl, newMainPhotoIndex);
   }
 
@@ -107,24 +114,28 @@ class Gallery extends React.Component {
           {
 
               this.state.photos.map((photo, index) => {
+                if (index >= this.state.carrBeginIndex && index <= this.state.carrEndIndex)  {
                 if (this.state.mainPhoto === photo.photo_url) {
                   return <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo-selected" src={photo.photo_url} />;
-                }
-                if (index === this.state.carrBeginIndex) {
+                } 
+                 else if  (index === this.state.carrEndIndex && (index >= 8) && (this.state.photos.length - index > 1)) {
                   return (
                     <div styleName="last-photo-holder">
                       <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />
                     </div>
                   );
-                } if (index > this.state.carrBeginIndex + 1 && index < this.state.carrEndIndex) {
+                } else if (index === this.state.carrBeginIndex && ((this.state.mainPhotoIndex - index) > 3)) {
+                  return (
+                    <div styleName="last-photo-holder">
+                      <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />
+                    </div>
+                  );
+                }
+                else /*if (index >= this.state.carrBeginIndex  && index < this.state.carrEndIndex)*/ {
                   return <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />;
-                } if (index === this.state.carrEndIndex) {
-                  return (
-                    <div styleName="last-photo-holder">
-                      <img onClick={() => { this.showClickedPhoto(photo.photo_url, index); }} styleName="carrousel-photo" src={photo.photo_url} />
-                    </div>
-                  );
-                }
+                } 
+              }
+
               })
               }
         </div>

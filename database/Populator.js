@@ -94,7 +94,12 @@ const populateListings = () => {
 
     'Gloufry has a mending economy, which is mainly supported by leatherworking, farming and herbalism. But their biggest strengths are refined baking and alchemy. However, Gloufry lacks people skilled in war.',
 
-    'Despite its strengths and weaknesses, Gloufry is most likely headed towards a horrible future under the leadership of Director Bimbik. But this remains to be seen.'];
+    'Despite its strengths and weaknesses, Gloufry is most likely headed towards a horrible future under the leadership of Director Bimbik. But this remains to be seen.', 
+
+    'Despite its strengths and weaknesses, Cullfield is most likely headed towards a harsh future under the leadership of Lady Gedney. But this remains to be seen.',
+
+    'Cullfield has a damaged economy, which is mainly supported by animal breeding, cooking and wine brewing. But their biggest strengths are deadly archers and weaponsmithing. However, Cullfield lacks people skilled in alchemy.'
+   ];
 
 
   const streetAdr = ['Woof Street', 'Miaw Street', 'Bone Street', 'Toy Street', 'Playground Street', 'Doggy Street', 'Kitty Street', 'Cooltown Street', 'Pet Street', 'Animal Town', 'Zomby Street', 'Thriller Street', 'Treat Street', 'Doggy Street', 'Rat Street', 'Kitten Street'];
@@ -188,3 +193,4 @@ populateLists();
 populateListings();
 populateListingsLists();
 populateListingPhotos();
+connection.end(); // so circleCi does not keep spinning up

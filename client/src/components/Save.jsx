@@ -276,7 +276,7 @@ Save to list
               </div>
 
               <div styleName="bottom-description-text">
-              {this.state.details.listing_space_description}
+                {this.state.details.listing_space_description}
               </div>
             </div>
 
@@ -286,7 +286,7 @@ Save to list
               </div>
 
               <div styleName="bottom-description-text">
-              {this.state.details.listing_neighborhood_description}
+                {this.state.details.listing_neighborhood_description}
               </div>
             </div>
           </div>
