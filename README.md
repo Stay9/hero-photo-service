@@ -37,6 +37,6 @@ npm install -g webpack
 npm install
 npm run react-dev
 
-within the database directory, run schema.sql then run Populate.js to populate the database.
+within the database directory, run schema.sql then run Populator.js to populate the database.
 ```
 
