@@ -18,7 +18,9 @@
 ## CRUD Usage
 
 - GET /listings/:listing_id/photos 
+
 Given a listing id, return all the photos associated with this listing.
+
 ```js
 {
   id: int, 
@@ -29,15 +31,19 @@ Given a listing id, return all the photos associated with this listing.
 ```
 
 - GET /users/:users_id/list 
+
 Given a user id, return all the lists owned by this id.
 ```js
+
 {
   list_user_id: int
 }
 ```
 
 - POST /users/:user_id/addList 
+
 Create a list 
+
 ```js
 {
   list_name: string,
@@ -46,7 +52,9 @@ Create a list
 ```
 
 - GET /listings/:listing_id/lists
+
 Given a listing id, get all the lists that contain this listing
+
 ```js
   {
     list_id: int
@@ -54,7 +62,9 @@ Given a listing id, get all the lists that contain this listing
 ```
 
 - POST /listings/:listing_id/lists/:list_id
+
 Add a listing to a list 
+
 ```js
 {
   list_name: string,
@@ -63,10 +73,13 @@ Add a listing to a list
 ```
 
 - DELETE /listings/:listing_id/lists/:list_id
+
 Delete a listing from a list 
 
 - GET /listings/:listing_id/details
+
 Get all the information about a listing
+
 ```js
 {
   id: int, 
@@ -84,7 +97,9 @@ Get all the information about a listing
 #### Extended CRUD Operations 
 
 - GET /users/:users_id
+
 When given a user id, retrieve all the information about that user
+
 ```js
 {
   id: int, 
@@ -95,7 +110,9 @@ When given a user id, retrieve all the information about that user
 ```
 
 - GET /listings/:listing_id/photos 
+
 Given a listing id, return all the photos associated with this listing
+
 ```js
 {
   id: int, 
@@ -106,7 +123,9 @@ Given a listing id, return all the photos associated with this listing
 ```
 
 - POST  /listings/:listing_id/photos/addPhoto 
+
 Add a photo associated with a listing 
+
 ```js
 {
   id: int, 
@@ -117,7 +136,9 @@ Add a photo associated with a listing
 ```
 
 - PUT /listings/:listing_id/photos/:id 
+
 Update the information of a photo
+
 ```js
 {
   id: int, 
@@ -128,7 +149,8 @@ Update the information of a photo
 ```
 
 - DELETE 
-delete a photo /listings/:listing_id/photos/:id 
+
+elete a photo /listings/:listing_id/photos/:id 
 
 ## Requirements
 
