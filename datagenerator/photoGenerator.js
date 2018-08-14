@@ -1,9 +1,10 @@
+// Create 10M records of photos in JSON for MongoDB
 const faker = require('faker');
 const fs = require('fs');
 
 const writeStream = fs.createWriteStream('data.json');
 writeStream.write('[');
-const numEntries = 10000000;
+const numEntries = 10000001;
 let i = 1;
 
 function getRandomInt(min, max) {
