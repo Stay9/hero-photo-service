@@ -25,6 +25,7 @@ CREATE TABLE lists (
 
 CREATE TABLE listings (
   id INT NOT NULL AUTO_INCREMENT, 
+  listing_name VARCHAR(50),
   listing_review_average INT,
   listing_review_total INT,
   listing_host_name VARCHAR(50),
