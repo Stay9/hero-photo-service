@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const writeStream = fs.createWriteStream('listings.json');
 writeStream.write('[');
-const numEntries = 10000000;
+const numEntries = 10000001;
 let i = 1;
 
 function getRandomInt(min, max) {
@@ -12,17 +12,29 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min; 
 }
 
+function getEightRandom() {
+  var arr = [];
+  for (var i = 0; i < 8; i++) {
+    arr.push(getRandomInt(1, 1047));
+  }
+  return arr;
+}
+
 function write() {
   let ok = true;
   while (i < numEntries && ok) {
-    let str = `{"id":${i}, "listing_name": "Listing ${i}", "listing_review_average": ${getRandomInt(1, 5)}, "listing_review_total": ${getRandomInt(1, 2000)}, "listing_host_name": "${faker.name.firstName()}", "listing_address": "${faker.address.city()}", "listing_host_photo_url": ${getRandomInt(1, 1000)}, "listing_description": "${faker.lorem.sentences()}", "listing_space_description": "${faker.lorem.sentences()}", "listing_neighborhood_description": "${faker.lorem.sentences()}"}`;
+    
+    let str;
+    for (j = 1; j < 9; j++) {
+      let str = `{"id":${i}, "listing_name": "Listing ${i}", "avgreview": ${getRandomInt(1, 5)}, "hostname": "${faker.name.firstName()}", "address": "${faker.address.city()}", "description": "${faker.lorem.sentences()}", "space": "${faker.lorem.sentences()}", "neighborhood": "${faker.lorem.sentences()}", "photos": [${getEightRandom()}]}`;
+      ok = writeStream.write(str);
+    }
     if (i !== numEntries - 1) str += ',';
     else str += ']';
     if ((i + 1) % 100000 === 0) {
       console.log(((i + 1) / 1000000) + ' mil listings entries created');
     }
     i += 1;
-    ok = writeStream.write(str);
   }
   if (i < numEntries) {
     writeStream.once('drain', write);
