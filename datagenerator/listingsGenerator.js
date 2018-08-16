@@ -1,3 +1,4 @@
+// Create 10M records of listings in JSON for MongoDB
 const faker = require('faker');
 const fs = require('fs');
 
