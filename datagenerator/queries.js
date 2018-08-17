@@ -1,3 +1,4 @@
+// Queries for PostgreSQL
 // generate 100 queries using the listings table
 // should return 100 rows
 function queryGenerator() {
@@ -20,3 +21,10 @@ function queryGenerator3() {
   }
 }
 // console.log(queryGenerator3());
+
+// Queries for MongoDB 
+function queryMongo() {
+  for (var i = 9999901; i < 10000001; i++) {
+    console.log(`SELECT * FROM photos WHERE id = ${i};`);
+  }
+}
