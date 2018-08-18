@@ -8,7 +8,7 @@ const getListingPhotos = (listingId, whenGotten) => {
       console.error('Database side error in retrieving data from the listings table ', err);
       whenGotten(err);
     } else {
-      console.log('Database side success in retriving data from the listings table ', res);
+      // console.log('Database side success in retriving data from the listings table ');
       whenGotten(null, res);
     }
   });
