@@ -1,18 +1,16 @@
 config:
   target: 'http://127.0.0.1:3000'
   phases:
-    - duration: 60
-      arrivalRate: 100
+    - duration: 30
+      arrivalRate: 5
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'
-  variables: 
-    sampleListingid: 
-      - [9195999, 9999999, 10000000]
+  processor: "./randomizer.js"
 scenarios:
   - flow:
     - loop: 
+      - function: "generate100Data"
       - get:
-          url: "/listings/{{ $loopElement }}/photos"
+          url: "/listings/{{ url }}/photos"
       count: 100
-      over: sampleListingid
