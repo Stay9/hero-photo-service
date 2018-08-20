@@ -7,6 +7,6 @@ app.listen(3000, (err) => {
   if (err) {
     console.log('Error connecting to the port :', err);
   } else {
-    console.log('Hero Photo server is listening on port 3000');
+    console.log('Hero Photo server is listening on port 3000 in', process.env.NODE_ENV, 'mode');
   }
 });
