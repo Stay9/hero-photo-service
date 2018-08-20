@@ -5,13 +5,17 @@ const path = require('path');
 const bodyParser = require('body-parser');
 // const Queries = require('../database/Queries.js'); // for mySQL
 const Queries = require('../database/psqlQueries.js'); // for PostgreSQL
+const responseTime = require('response-time')
+const axios = require('axios');
+const redis = require("redis");
+const client = redis.createClient();
 
 const app = express();
-
 
 // making a middleware to tarck all incoming requests
 app.use((req, res, next) => {
   // console.log('Request method: ', req.method);
+  responseTime();
   next();
 });
 
@@ -20,19 +24,42 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 
 app.use(bodyParser.json());
 
-app.get('/listings/:listing_id/photos', (req, res) => {
+const getPhotos = (req, res) => {
   const listingId = req.params.listing_id;
+  const url = `http://127.0.0.7:3000/listings/${listingId}/photos`;
   // query the database to get all data from the listing_photos table
-  Queries.getListingPhotos(listingId, (err, results) => {
-    if (err) {
-      console.log('Server side error in query to get data from the listings_data table', err);
+  // Queries.getListingPhotos(listingId, (err, results) => {
+  //   if (err) {
+  //     console.log('Server side error in query to get data from the listings_data table', err);
+  //   } else {
+  //     // console.log('Server side success in query to get data from the listings_data table');
+  //     res.json(results);
+  //   }
+  // });
+  return axios.get(url)
+    .then(response => {
+      const photos = response;
+      client.setex(listingId, 3600, JSON.stringify(photos));
+
+      res.send(photos);
+    })
+    .catch(err => {
+      res.send('Server side error in query to get data from the listings_data table');
+    });
+};
+
+const getCache = (req, res) => {
+  const listingId = req.params.listing_id;
+  client.get(listingId, (err, result) => {
+    if (result) {
+      res.send(result);
     } else {
-      // console.log('Server side success in query to get data from the listings_data table');
-      res.json(results);
+      getPhotos(req, res);
     }
   });
-  // res.send(200);
-});
+}
+
+app.get('/listings/:listing_id/photos', getCache);
 
 // app.get('/users/:user_id/list', (req, res) => {
 //   const userId = req.params.user_id;
