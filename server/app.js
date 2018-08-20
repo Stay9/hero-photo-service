@@ -5,8 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 // const Queries = require('../database/Queries.js'); // for mySQL
 const Queries = require('../database/psqlQueries.js'); // for PostgreSQL
-const responseTime = require('response-time')
-const axios = require('axios');
+const compression = require('compression');
 const redis = require("redis");
 const client = redis.createClient();
 
@@ -15,7 +14,7 @@ const app = express();
 // making a middleware to tarck all incoming requests
 app.use((req, res, next) => {
   // console.log('Request method: ', req.method);
-  // responseTime();
+  compression(); // GZIP all assets
   next();
 });
 
