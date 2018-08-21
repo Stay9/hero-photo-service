@@ -1,16 +1,14 @@
 config:
   target: 'http://127.0.0.1:3000'
+  payload: 
+    path: "loadtesting.csv"
+    fields: 
+      - "listingId"
   phases:
     - duration: 30
-      arrivalRate: 5
-  defaults:
-    headers:
-      x-my-service-auth: '987401838271002188298567'
-  processor: "./randomizer.js"
+      arrivalRate: 4000
 scenarios:
   - flow:
-    - loop: 
-      - function: "generate100Data"
-      - get:
-          url: "/listings/{{ url }}/photos"
-      count: 100
+    - get:
+        url: "/listings/{{ listingId }}/photos"
+    count: 1000
