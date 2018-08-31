@@ -6,10 +6,10 @@ config:
       - "listingId"
   phases:
     - duration: 30
-      arrivalRate: 1
-      rampTo: 1000
+      arrivalRate: 10
+      rampTo: 5000
 scenarios:
   - flow:
     - get:
         url: "/listings/{{ listingId }}/photos"
-    count: 500
+    count: 5000

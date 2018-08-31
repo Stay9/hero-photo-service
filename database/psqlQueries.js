@@ -2,6 +2,7 @@ const connection = require('./index.js');
 
 // Get all the photos and listing details associated with one listing 
 const getListingPhotos = (listingId, whenGotten) => {
+  console.log('test');
   const Query = `SELECT * FROM listings INNER JOIN photos ON listing_id = listings.id WHERE listing_id = $1;`;
   connection.query(Query, [listingId], (err, res) => {
     if (err) {
